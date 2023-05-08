@@ -28,9 +28,7 @@ struct ResizingView<ClippedContent: View>: View {
     }
 
     private var width: CGFloat {
-        let val = abs((dragWidth + widthPosition)).clamp(minWidth, maxWidth)
-        print("minWidth \(minWidth) maxWidth \(maxWidth), val \(val)")
-        return val
+        return abs((dragWidth + widthPosition)).clamp(minWidth, maxWidth)
     }
 
     private var clampedPosition: CGFloat {
@@ -118,13 +116,13 @@ struct Resizer: View {
                 .overlay(content: {
                     HStack(spacing: 4) {
                         Capsule()
-                            .fill(.separator)
+                            .fill(.secondary)
                             .frame(width: 2)
                         Capsule()
-                            .fill(.separator)
+                            .fill(.secondary)
                             .frame(width: 2)
                         Capsule()
-                            .fill(.separator)
+                            .fill(.secondary)
                             .frame(width: 2)
                     }
                     .padding(2)

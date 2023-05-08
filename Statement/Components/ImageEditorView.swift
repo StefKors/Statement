@@ -12,16 +12,31 @@ struct ImageEditorView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            ResizableView(
-                fullContent: {
-                    ImageView(imageState: model.imageState)
-                        .scaledToFit()
-                },
-                clippedContent: {
-                    ImageView(imageState: model.imageState)
-                        .scaledToFit()
-                        .blendMode(.colorDodge)
-                })
+            HStack(alignment: .top) {
+                ResizableView(
+                    fullContent: {
+                        ImageView(imageState: model.imageState)
+                            .scaledToFit()
+                    },
+                    clippedContent: {
+                        ImageView(imageState: model.filterImageState)
+                            .scaledToFit()
+                            .blendMode(.colorDodge)
+                            .overlay {
+                                Rectangle().stroke(lineWidth: 20)
+                            }
+                    })
+
+                VStack(alignment: .leading) {
+                    ForEach(Model.ImageFilter.allCases, id: \.self) { filter in
+                        Button {
+                            model.applyFilter(type: filter)
+                        } label: {
+                            Label("Apply \(filter.rawValue)", systemImage: "camera.filters")
+                        }
+                    }
+                }
+            }
 
             HStack {
                 ImageSpecView(label: "\u{0192}1.8")
