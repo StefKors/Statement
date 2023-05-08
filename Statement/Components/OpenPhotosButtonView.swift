@@ -18,7 +18,7 @@ struct OpenPhotosButtonView: View {
         VStack {
             PaperStackView(hover: isHovering)
 
-            Button("Open Image") {
+            Button("Open Photo") {
                 isPresented.toggle()
             }
         }
@@ -29,6 +29,13 @@ struct OpenPhotosButtonView: View {
             isPresented.toggle()
         }
         .photosPicker(isPresented: $isPresented, selection: $model.imageSelection, matching: .images)
+        .toolbar(content: {
+            ToolbarItem(placement: .primaryAction) {
+                Button("Open Photo") {
+                    isPresented.toggle()
+                }
+            }
+        })
     }
 }
 

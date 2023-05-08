@@ -15,10 +15,20 @@ struct ContentView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 6)
                 .fill(.clear)
-            OpenPhotosButtonView()
+
+            switch model.imageState {
+            case .empty:
+                OpenPhotosButtonView()
+                    .navigationSubtitle("Open Photo")
+
+            default:
+                ImageEditorView()
+                    .navigationSubtitle("Edit Photo")
+            }
         }
         .dottedBackgroundPattern()
         .scenePadding()
+        
     }
 }
 

@@ -7,18 +7,29 @@
 
 
 import SwiftUI
+import AppKit
 import PhotosUI
 import CoreTransferable
 
 @MainActor
 class Model: ObservableObject {
+    internal init() {
+        if let data = storage {
+            guard let nsImage = NSImage(data: data) else {
+                return
+            }
+            let image = Image(nsImage: nsImage)
+            self.imageState = .success(EditorImage(image: image, data: data))
+        }
+    }
+
 
     // MARK: - Image
 
     enum ImageState {
         case empty
         case loading(Progress)
-        case success(Image)
+        case success(EditorImage)
         case failure(Error)
     }
 
@@ -28,6 +39,7 @@ class Model: ObservableObject {
 
     struct EditorImage: Transferable {
         let image: Image
+        let data: Data
 
         static var transferRepresentation: some TransferRepresentation {
             DataRepresentation(importedContentType: .image) { data in
@@ -35,10 +47,12 @@ class Model: ObservableObject {
                     throw TransferError.importFailed
                 }
                 let image = Image(nsImage: nsImage)
-                return EditorImage(image: image)
+                return EditorImage(image: image, data: data)
             }
         }
     }
+
+    @AppStorage("imageDataStorage") var storage: Data?
 
     @Published private(set) var imageState: ImageState = .empty
 
@@ -62,7 +76,8 @@ class Model: ObservableObject {
                 }
                 switch result {
                 case .success(let editorImage?):
-                    self.imageState = .success(editorImage.image)
+                    self.imageState = .success(editorImage)
+                    self.storage = editorImage.data
                 case .success(nil):
                     self.imageState = .empty
                 case .failure(let error):

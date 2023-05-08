@@ -15,7 +15,9 @@ struct StatementApp: App {
             ContentView()
                 .environmentObject(model)
                 .buttonStyle(.regularButtonStyle)
+                .navigationTitle("Statement")
         }
+        .windowStyle(.titleBar)
         .windowToolbarStyle(.unified(showsTitle: true))
     }
 }
