@@ -17,26 +17,26 @@ public extension Comparable {
 struct ResizingView<ClippedContent: View>: View {
     let clippedContent: () -> ClippedContent
     let geo: GeometryProxy
-    
+
     private let minWidth: CGFloat = 50
-    
+
     @GestureState private var dragWidth = CGFloat.zero
     @State private var widthPosition = CGFloat.zero
-    
+
     var maxWidth: CGFloat {
         (geo.size.width - 50).clamp(minWidth, geo.size.width)
     }
-    
+
     private var width: CGFloat {
         let val = abs((dragWidth + widthPosition)).clamp(minWidth, maxWidth)
         print("minWidth \(minWidth) maxWidth \(maxWidth), val \(val)")
         return val
     }
-    
+
     private var clampedPosition: CGFloat {
         widthPosition.clamp(minWidth, maxWidth)
     }
-    
+
     var body: some View {
         ZStack(alignment: .leading) {
             clippedContent()
@@ -47,7 +47,7 @@ struct ResizingView<ClippedContent: View>: View {
                             widthPosition = geo.size.width/2
                         }
                 }
-            
+
             Resizer()
                 .position(x: clampedPosition, y: geo.size.height/2)
                 .offset(x: dragWidth, y: 0)
@@ -58,11 +58,11 @@ struct ResizingView<ClippedContent: View>: View {
                             if (newWith + widthPosition) > maxWidth {
                                 return
                             }
-                            
+
                             if (newWith + widthPosition) < minWidth {
                                 return
                             }
-                            
+
                             state = newWith
                         }
                         .onEnded({ value in
@@ -78,23 +78,21 @@ struct ResizingView<ClippedContent: View>: View {
 struct ResizableView<FullContent: View, ClippedContent: View>: View {
     let fullContent: () -> FullContent
     let clippedContent: () -> ClippedContent
-    
+
     private let minWidth: CGFloat = 50
-    
+
     @GestureState private var dragWidth = CGFloat.zero
     @State private var widthPosition = CGFloat.zero
     @State private var maxWidth: CGFloat = 400
-    
+
     private var width: CGFloat {
-        let val = abs((dragWidth + widthPosition)).clamp(minWidth, maxWidth)
-        print("minWidth \(minWidth) maxWidth \(maxWidth), val \(val)")
-        return val
+        return abs((dragWidth + widthPosition)).clamp(minWidth, maxWidth)
     }
-    
+
     private var clampedPosition: CGFloat {
         widthPosition.clamp(minWidth, maxWidth)
     }
-    
+
     var body: some View {
         fullContent()
             .overlay {
@@ -103,7 +101,7 @@ struct ResizableView<FullContent: View, ClippedContent: View>: View {
                 }
             }
             .mask(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 12)
             }
     }
 }
@@ -114,7 +112,7 @@ struct Resizer: View {
             Capsule()
                 .fill(Color.primary)
                 .frame(width: 2)
-            
+
             Rectangle()
                 .fill(.clear)
                 .overlay(content: {

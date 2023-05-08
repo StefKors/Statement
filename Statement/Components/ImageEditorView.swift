@@ -11,16 +11,26 @@ struct ImageEditorView: View {
     @EnvironmentObject private var model: Model
 
     var body: some View {
-        ResizableView(
-            fullContent: {
-                ImageView(imageState: model.imageState)
-                    .scaledToFit()
-            },
-            clippedContent: {
-                ImageView(imageState: model.imageState)
-                    .scaledToFit()
-                    .blendMode(.colorDodge)
-            })
+        VStack(alignment: .leading) {
+            ResizableView(
+                fullContent: {
+                    ImageView(imageState: model.imageState)
+                        .scaledToFit()
+                },
+                clippedContent: {
+                    ImageView(imageState: model.imageState)
+                        .scaledToFit()
+                        .blendMode(.colorDodge)
+                })
+
+            HStack {
+                ImageSpecView(label: "\u{0192}1.8")
+                ImageSpecView(label: "1/2500s")
+                ImageSpecView(label: "ISO 20", systemImage: "camera.aperture")
+            }
+            .fontDesign(.monospaced)
+
+        }
         .toolbar(content: {
             ToolbarItem(placement: .primaryAction) {
                 OpenPhotosToolbarButtonView()
