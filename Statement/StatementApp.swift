@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct StatementApp: App {
+    @StateObject var model = Model()
     var body: some Scene {
-        DocumentGroup(newDocument: StatementDocument()) { file in
-            ContentView(document: file.$document)
+        WindowGroup("Statement") {
+            ContentView()
+                .environmentObject(model)
+                .buttonStyle(.regularButtonStyle)
         }
+        .windowToolbarStyle(.unified(showsTitle: true))
     }
 }

@@ -6,17 +6,24 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct ContentView: View {
-    @Binding var document: StatementDocument
+    @EnvironmentObject private var model: Model
 
     var body: some View {
-        TextEditor(text: $document.text)
+        ZStack {
+            RoundedRectangle(cornerRadius: 6)
+                .fill(.clear)
+            OpenPhotosButtonView()
+        }
+        .dottedBackgroundPattern()
+        .scenePadding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(document: .constant(StatementDocument()))
+        ContentView()
     }
 }
