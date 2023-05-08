@@ -21,6 +21,7 @@
 		8A8857082A09286200397B3C /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857072A09286200397B3C /* ImageView.swift */; };
 		8A88570A2A092A3A00397B3C /* ImageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857092A092A3A00397B3C /* ImageEditorView.swift */; };
 		8A88570C2A092E3F00397B3C /* OpenPhotosToolbarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88570B2A092E3F00397B3C /* OpenPhotosToolbarButtonView.swift */; };
+		8A88570E2A0933B800397B3C /* ResizableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88570D2A0933B800397B3C /* ResizableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		8A8857072A09286200397B3C /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		8A8857092A092A3A00397B3C /* ImageEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorView.swift; sourceTree = "<group>"; };
 		8A88570B2A092E3F00397B3C /* OpenPhotosToolbarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenPhotosToolbarButtonView.swift; sourceTree = "<group>"; };
+		8A88570D2A0933B800397B3C /* ResizableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				8A88570B2A092E3F00397B3C /* OpenPhotosToolbarButtonView.swift */,
 				8A8857072A09286200397B3C /* ImageView.swift */,
 				8A8857092A092A3A00397B3C /* ImageEditorView.swift */,
+				8A88570D2A0933B800397B3C /* ResizableView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				8A8856FA2A09184600397B3C /* Model.swift in Sources */,
 				8A8857002A091CDB00397B3C /* Color.swift in Sources */,
 				8A88570C2A092E3F00397B3C /* OpenPhotosToolbarButtonView.swift in Sources */,
+				8A88570E2A0933B800397B3C /* ResizableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

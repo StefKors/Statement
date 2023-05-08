@@ -26,6 +26,7 @@ struct ContentView: View {
                     .navigationSubtitle("Edit Photo")
             }
         }
+        .padding()
         .dottedBackgroundPattern()
         .scenePadding()
         

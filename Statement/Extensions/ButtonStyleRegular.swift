@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-struct RegularButtonStyle: ButtonStyle {
-    @Environment(\.isEnabled) private var isEnabled
+struct RegularButtonStyleModifier: ViewModifier {
     @Environment(\.colorScheme) private var colorScheme
     @State var isHovering: Bool = false
 
@@ -36,94 +35,110 @@ struct RegularButtonStyle: ButtonStyle {
 
     var color1: Color {
         if colorScheme == .light {
-            return RegularButtonStyle.light1
+            return RegularButtonStyleModifier.light1
         } else {
-            return RegularButtonStyle.dark1
+            return RegularButtonStyleModifier.dark1
         }
     }
 
     var color2: Color {
         if colorScheme == .light {
-            return RegularButtonStyle.light2
+            return RegularButtonStyleModifier.light2
         } else {
-            return RegularButtonStyle.dark2
+            return RegularButtonStyleModifier.dark2
         }
     }
 
     var colorF1: Color {
         if colorScheme == .light {
-            return RegularButtonStyle.lightF1
+            return RegularButtonStyleModifier.lightF1
         } else {
-            return RegularButtonStyle.darkF1
+            return RegularButtonStyleModifier.darkF1
         }
     }
 
     var colorF2: Color {
         if colorScheme == .light {
-            return RegularButtonStyle.lightF2
+            return RegularButtonStyleModifier.lightF2
         } else {
-            return RegularButtonStyle.darkF2
+            return RegularButtonStyleModifier.darkF2
         }
     }
 
     var colorShadow: Color {
         if colorScheme == .light {
-            return RegularButtonStyle.lightShadow
+            return RegularButtonStyleModifier.lightShadow
         } else {
-            return RegularButtonStyle.darkShadow
+            return RegularButtonStyleModifier.darkShadow
         }
     }
+
+    func body(content: Content) -> some View {
+        content
+            .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
+            .background {
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(hoverOutline, lineWidth: 3))
+                    .overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(hoverOutline.opacity(0.2), lineWidth: 6))
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .fill(
+                        LinearGradient(
+                            gradient:
+                                Gradient(colors: [
+                                    colorF1,
+                                    colorF2
+                                ]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .overlay(
+                        RoundedRectangle(
+                            cornerRadius: cornerRadius,
+                            style: .continuous
+                        ).stroke(
+                            LinearGradient(
+                                gradient:
+                                    Gradient(colors: [
+                                        color1,
+                                        color2
+                                    ]),
+                                startPoint: .top,
+                                endPoint: .bottom
+                            ),
+                            lineWidth: 1
+                        )
+                    )
+            }
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .shadow(color: colorShadow, radius: 2, x: 0, y: 1)
+            )
+
+            .onHover(perform: { hoverState in
+                withAnimation(.easeIn(duration: 0.15)) {
+                    isHovering = hoverState
+                }
+            })
+    }
+}
+
+extension View {
+    func regularButtonStyle() -> some View {
+        modifier(RegularButtonStyleModifier())
+    }
+}
+
+struct RegularButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
 
     func makeBody(configuration: Configuration) -> some View {
         HStack {
             configuration.label
         }
-        .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 8))
-        .background {
-            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                .overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(hoverOutline, lineWidth: 3))
-                .overlay(RoundedRectangle(cornerRadius: cornerRadius).stroke(hoverOutline.opacity(0.2), lineWidth: 6))
-            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                .fill(
-                    LinearGradient(
-                        gradient:
-                            Gradient(colors: [
-                                colorF1,
-                                colorF2
-                            ]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-                .overlay(
-                    RoundedRectangle(
-                        cornerRadius: cornerRadius,
-                        style: .continuous
-                    ).stroke(
-                        LinearGradient(
-                            gradient:
-                                Gradient(colors: [
-                                    color1,
-                                    color2
-                                ]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        ),
-                        lineWidth: 1
-                    )
-                )
-        }
-        .background(
-            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                .shadow(color: colorShadow, radius: 2, x: 0, y: 1)
-        )
-
-        .onHover(perform: { hoverState in
-            withAnimation(.easeIn(duration: 0.15)) {
-                isHovering = hoverState
-            }
-        })
+        .regularButtonStyle()
         .allowsHitTesting(isEnabled)
+
     }
 }
 
@@ -146,12 +161,6 @@ struct ButtonStyleRegular_Previews: PreviewProvider {
                 .padding()
                 .environment(\.colorScheme, .dark)
                 .previewDisplayName("Default")
-
-
-            Button("Click Here! (Hover)", action: {})
-                .buttonStyle(RegularButtonStyle(isHovering: true))
-                .padding()
-                .previewDisplayName("Hover")
 
             Button("Click Here! (Disabled)", action: {})
                 .buttonStyle(.regularButtonStyle)
