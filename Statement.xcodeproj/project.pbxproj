@@ -35,6 +35,8 @@
 		8A8857312A0A80B300397B3C /* MapPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857302A0A80B300397B3C /* MapPinView.swift */; };
 		8A8857332A0A8C6F00397B3C /* MapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857322A0A8C6F00397B3C /* MapLocation.swift */; };
 		8A8857352A0A8C9600397B3C /* Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857342A0A8C9600397B3C /* Exif.swift */; };
+		8A8857372A0A9C1F00397B3C /* AdjustableColorCubeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857362A0A9C1F00397B3C /* AdjustableColorCubeModel.swift */; };
+		8A8857392A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857382A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,8 @@
 		8A8857302A0A80B300397B3C /* MapPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPinView.swift; sourceTree = "<group>"; };
 		8A8857322A0A8C6F00397B3C /* MapLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocation.swift; sourceTree = "<group>"; };
 		8A8857342A0A8C9600397B3C /* Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exif.swift; sourceTree = "<group>"; };
+		8A8857362A0A9C1F00397B3C /* AdjustableColorCubeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustableColorCubeModel.swift; sourceTree = "<group>"; };
+		8A8857382A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustableColorCubeFilterControlsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				8A8857192A0A57B400397B3C /* ColorCubeModel.swift */,
+				8A8857362A0A9C1F00397B3C /* AdjustableColorCubeModel.swift */,
 				8A88571B2A0A5BEA00397B3C /* SepiaModel.swift */,
 				8A88571D2A0A5D1000397B3C /* BaseFilterModel.swift */,
 			);
@@ -170,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				8A8857282A0A606F00397B3C /* ColorCubeFilterControlsView.swift */,
+				8A8857382A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift */,
 				8A88572A2A0A60AD00397B3C /* SepiaFilterControlsView.swift */,
 			);
 			path = FilterControls;
@@ -257,6 +263,7 @@
 				8A8856EC2A090EE700397B3C /* ContentView.swift in Sources */,
 				8A8856FD2A09198700397B3C /* DottedBackgroundView.swift in Sources */,
 				8A8857182A0A55E900397B3C /* RGBtoHSV.swift in Sources */,
+				8A8857392A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift in Sources */,
 				8A88571E2A0A5D1000397B3C /* BaseFilterModel.swift in Sources */,
 				8A8857162A0954CB00397B3C /* ImageSpecView.swift in Sources */,
 				8A88571C2A0A5BEA00397B3C /* SepiaModel.swift in Sources */,
@@ -267,6 +274,7 @@
 				8A8857292A0A606F00397B3C /* ColorCubeFilterControlsView.swift in Sources */,
 				8A88572D2A0A743100397B3C /* ExifDataView.swift in Sources */,
 				8A88572B2A0A60AD00397B3C /* SepiaFilterControlsView.swift in Sources */,
+				8A8857372A0A9C1F00397B3C /* AdjustableColorCubeModel.swift in Sources */,
 				8A8857332A0A8C6F00397B3C /* MapLocation.swift in Sources */,
 				8A88571A2A0A57B400397B3C /* ColorCubeModel.swift in Sources */,
 				8A88570E2A0933B800397B3C /* ResizableView.swift in Sources */,

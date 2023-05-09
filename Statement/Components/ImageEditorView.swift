@@ -10,6 +10,7 @@ import SwiftUI
 struct ImageEditorView: View {
     @EnvironmentObject private var model: Model
     @EnvironmentObject private var colorCubeFilter: ColorCubeModel
+    @EnvironmentObject private var adjustableColorCubeFilter: AdjustableColorCubeModel
     @EnvironmentObject private var sepiaFilter: SepiaModel
 
     var body: some View {
@@ -23,7 +24,7 @@ struct ImageEditorView: View {
                     clippedContent: {
                         ZStack {
                             if let image = model.imageState.image {
-                                ForEach([sepiaFilter, colorCubeFilter]) { filter in
+                                ForEach([sepiaFilter, colorCubeFilter, adjustableColorCubeFilter]) { filter in
                                     if filter.showFilter {
                                         ImageView(imageState: filter.imageState)
                                             .scaledToFit()

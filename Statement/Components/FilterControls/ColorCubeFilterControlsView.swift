@@ -7,6 +7,30 @@
 
 import SwiftUI
 
+struct LutImagePickerView: View {
+    let lut: LutImage
+    let isSelected: Bool
+
+    var body: some View {
+        HStack {
+            Spacer()
+            Image(lut.rawValue)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 80, height: 80)
+                .cornerRadius(6)
+                .overlay {
+                    if isSelected {
+                        RoundedRectangle(cornerRadius: 6)
+                            .stroke(Color.accentColor, lineWidth: 3)
+                    }
+                }
+                .shadow(color: isSelected ? Color.accentColor : .clear, radius: 5, x: 0, y: 2)
+            Spacer()
+        }
+    }
+}
+
 struct ColorCubeFilterControlsView: View {
     @EnvironmentObject private var model: ColorCubeModel
 
@@ -17,40 +41,19 @@ struct ColorCubeFilterControlsView: View {
     var body: some View {
         Section {
             Toggle("Show/Hide", isOn: $model.showFilter)
-            Slider(
-                value: $model.brightnessAdjustment,
-                in: 0...1,
-                step: step
-            ) {
-                Text("Brightness")
-            } minimumValueLabel: {
-                Text("0")
-            } maximumValueLabel: {
-                Text("1")
-            }
 
-            Slider(
-                value: $model.saturationAdjustment,
-                in: 0...1,
-                step: step
-            ) {
-                Text("Saturation")
-            } minimumValueLabel: {
-                Text("0")
-            } maximumValueLabel: {
-                Text("1")
-            }
-
-            Slider(
-                value: $model.destCenterHueAngle,
-                in: 0...1,
-                step: step
-            ) {
-                Text("Hue Angle")
-            } minimumValueLabel: {
-                Text("0")
-            } maximumValueLabel: {
-                Text("1")
+            HStack {
+                ForEach(LutImage.allCases, id: \.self) { lut in
+                    LutImagePickerView(lut: lut, isSelected: model.selectedImage == lut)
+                        .onTapGesture {
+                            withAnimation(.easeIn(duration: 0.15)) {
+                                model.selectedImage = lut
+                                if let image {
+                                    model.processImage(image)
+                                }
+                            }
+                        }
+                }
             }
 
             Button("Apply Filter") {
@@ -60,7 +63,7 @@ struct ColorCubeFilterControlsView: View {
             .disabled(image == nil)
         } header: {
             Text("ColorCube Filter")
-        }        
+        }
     }
 }
 

@@ -11,6 +11,7 @@ import SwiftUI
 struct StatementApp: App {
     @StateObject private var model = Model()
     @StateObject private var colorCubeFilter = ColorCubeModel()
+    @StateObject private var adjustableColorCubeFilter = AdjustableColorCubeModel()
     @StateObject private var sepiaFilter = SepiaModel()
 
     var body: some Scene {
@@ -19,6 +20,7 @@ struct StatementApp: App {
                 .environmentObject(model)
                 .environmentObject(sepiaFilter)
                 .environmentObject(colorCubeFilter)
+                .environmentObject(adjustableColorCubeFilter)
                 .buttonStyle(.regularButtonStyle)
                 .navigationTitle("Statement")
         }

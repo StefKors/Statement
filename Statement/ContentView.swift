@@ -34,12 +34,12 @@ struct ContentView: View {
                 Form {
                     SepiaFilterControlsView(image: model.imageState.image)
                     ColorCubeFilterControlsView(image: model.imageState.image)
+                    AdjustableColorCubeFilterControlsView(image: model.imageState.image)
 
                     if let exif =  model.imageState.image?.exif {
                         Section("Exif Data") {
                             ExifDataView(exif: exif)
                         }
-
                     }
                 }
                 .formStyle(.grouped)
