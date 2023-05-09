@@ -15,20 +15,11 @@ struct ImageEditorView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                ResizableView(
-                    fullContent: {
-                        ImageView(imageState: model.imageState)
-                            .scaledToFit()
-                    },
-                    clippedContent: {
-                        ZStack {
-                            if model.filteredImageState.image != nil {
-                                ImageView(imageState: model.filteredImageState)
-                                    .scaledToFit()
-                            }
-                        }
-                    })
+            switch model.viewPreference {
+            case .sideBySide:
+                SideBySideView()
+            case .stacked:
+                StackedView()
             }
         }
         .task {

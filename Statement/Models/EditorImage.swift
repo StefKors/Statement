@@ -11,10 +11,11 @@ enum TransferError: Error {
     case importFailed
 }
 
-struct EditorImage: Transferable {
+struct EditorImage: Transferable, Identifiable {
     let image: Image
     let data: Data
     let exif: Exif
+    let id: UUID = UUID()
 
     static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(importedContentType: .image) { data in

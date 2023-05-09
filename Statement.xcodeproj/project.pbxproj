@@ -39,6 +39,9 @@
 		8A8857392A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857382A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift */; };
 		8A88573C2A0AA50300397B3C /* SaveImageToolbarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88573B2A0AA50300397B3C /* SaveImageToolbarButtonView.swift */; };
 		8A88573E2A0ABA4300397B3C /* CancelFilterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88573D2A0ABA4300397B3C /* CancelFilterButtonView.swift */; };
+		8A8857402A0ABB3600397B3C /* StackedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88573F2A0ABB3600397B3C /* StackedView.swift */; };
+		8A8857422A0ABB4400397B3C /* SideBySideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857412A0ABB4400397B3C /* SideBySideView.swift */; };
+		8A8857442A0ABE7F00397B3C /* ViewTypeSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857432A0ABE7F00397B3C /* ViewTypeSwitcherView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +80,9 @@
 		8A8857382A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustableColorCubeFilterControlsView.swift; sourceTree = "<group>"; };
 		8A88573B2A0AA50300397B3C /* SaveImageToolbarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveImageToolbarButtonView.swift; sourceTree = "<group>"; };
 		8A88573D2A0ABA4300397B3C /* CancelFilterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelFilterButtonView.swift; sourceTree = "<group>"; };
+		8A88573F2A0ABB3600397B3C /* StackedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedView.swift; sourceTree = "<group>"; };
+		8A8857412A0ABB4400397B3C /* SideBySideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBySideView.swift; sourceTree = "<group>"; };
+		8A8857432A0ABE7F00397B3C /* ViewTypeSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTypeSwitcherView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +145,8 @@
 				8A88572C2A0A743100397B3C /* ExifDataView.swift */,
 				8A8857272A0A605B00397B3C /* FilterControls */,
 				8A8857092A092A3A00397B3C /* ImageEditorView.swift */,
+				8A8857412A0ABB4400397B3C /* SideBySideView.swift */,
+				8A88573F2A0ABB3600397B3C /* StackedView.swift */,
 				8A88573D2A0ABA4300397B3C /* CancelFilterButtonView.swift */,
 				8A88573B2A0AA50300397B3C /* SaveImageToolbarButtonView.swift */,
 				8A8857152A0954CB00397B3C /* ImageSpecView.swift */,
@@ -148,6 +156,7 @@
 				8A88570B2A092E3F00397B3C /* OpenPhotosToolbarButtonView.swift */,
 				8A8857032A091EF300397B3C /* PaperStackView.swift */,
 				8A88570D2A0933B800397B3C /* ResizableView.swift */,
+				8A8857432A0ABE7F00397B3C /* ViewTypeSwitcherView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -270,6 +279,7 @@
 				8A8857222A0A5DD600397B3C /* EditorImage.swift in Sources */,
 				8A8857312A0A80B300397B3C /* MapPinView.swift in Sources */,
 				8A88573E2A0ABA4300397B3C /* CancelFilterButtonView.swift in Sources */,
+				8A8857402A0ABB3600397B3C /* StackedView.swift in Sources */,
 				8A88573C2A0AA50300397B3C /* SaveImageToolbarButtonView.swift in Sources */,
 				8A8857022A091E5200397B3C /* ButtonStyleRegular.swift in Sources */,
 				8A88570A2A092A3A00397B3C /* ImageEditorView.swift in Sources */,
@@ -279,6 +289,7 @@
 				8A8856EC2A090EE700397B3C /* ContentView.swift in Sources */,
 				8A8856FD2A09198700397B3C /* DottedBackgroundView.swift in Sources */,
 				8A8857182A0A55E900397B3C /* RGBtoHSV.swift in Sources */,
+				8A8857422A0ABB4400397B3C /* SideBySideView.swift in Sources */,
 				8A8857392A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift in Sources */,
 				8A88571E2A0A5D1000397B3C /* BaseFilterModel.swift in Sources */,
 				8A8857162A0954CB00397B3C /* ImageSpecView.swift in Sources */,
@@ -290,6 +301,7 @@
 				8A8857292A0A606F00397B3C /* ColorCubeFilterControlsView.swift in Sources */,
 				8A88572D2A0A743100397B3C /* ExifDataView.swift in Sources */,
 				8A88572B2A0A60AD00397B3C /* SepiaFilterControlsView.swift in Sources */,
+				8A8857442A0ABE7F00397B3C /* ViewTypeSwitcherView.swift in Sources */,
 				8A8857372A0A9C1F00397B3C /* AdjustableColorCubeModel.swift in Sources */,
 				8A8857332A0A8C6F00397B3C /* MapLocation.swift in Sources */,
 				8A88571A2A0A57B400397B3C /* ColorCubeModel.swift in Sources */,

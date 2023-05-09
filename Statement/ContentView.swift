@@ -27,8 +27,12 @@ struct ContentView: View {
                         .navigationSubtitle("Edit Photo")
                 }
             }
+            .safeAreaInset(edge: .bottom, content: {
+                ViewTypeSwitcherView()
+            })
             .padding()
             .dottedBackgroundPattern()
+            .animation(.interpolatingSpring(stiffness: 300, damping: 20), value: model.viewPreference)
 
             VStack {
                 Form {

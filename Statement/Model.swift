@@ -18,6 +18,12 @@ enum FilterType: String, CaseIterable {
     case none
 }
 
+enum ViewType: String, CaseIterable, Identifiable {
+    case stacked
+    case sideBySide
+    var id: Self { self }
+}
+
 @MainActor
 class Model: ObservableObject {
     internal init() {
@@ -46,6 +52,7 @@ class Model: ObservableObject {
     }
     @Published var enabledFilter: FilterType = .colorCube
     @Published var filteredImageState: ImageState = .empty
+    @Published var viewPreference: ViewType = .stacked
 
     private func loadTransferable(from imageSelection: PhotosPickerItem) -> Progress {
         return imageSelection.loadTransferable(type: EditorImage.self) { result in
