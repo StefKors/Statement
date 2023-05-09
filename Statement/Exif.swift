@@ -46,8 +46,7 @@ struct Exif {
         guard let cgImage = CGImageSourceCreateWithData(data as CFData, nil),
               let metaDict: NSDictionary = CGImageSourceCopyPropertiesAtIndex(cgImage, 0, nil) else { return }
 
-        let data: NSDictionary = metaDict.object(forKey: kCGImagePropertyExifDictionary) as! NSDictionary
-        print(data)
+        guard let data: NSDictionary = metaDict.object(forKey: kCGImagePropertyExifDictionary) as? NSDictionary else { return }
         self.aperture = data["ApertureValue"] as? CGFloat
         self.brightness = data["BrightnessValue"] as? CGFloat
         self.colorSpace = data["ColorSpace"] as? Int
@@ -86,8 +85,7 @@ struct Exif {
         self.sensingMethod = data["SensingMethod"] as? Int
         self.shutterSpeedValue = data["ShutterSpeedValue"] as? CGFloat
         self.whiteBalance = data["WhiteBalance"] as? Int
-
-        let gpsData: NSDictionary = metaDict.object(forKey: kCGImagePropertyGPSDictionary) as! NSDictionary
+        guard let gpsData: NSDictionary = metaDict.object(forKey: kCGImagePropertyGPSDictionary) as? NSDictionary else { return }
         if let latitude = gpsData["Latitude"] as? Double, let longitude = gpsData["Longitude"] as? Double {
             self.location = MapLocation(latitude: latitude, longitude: longitude)
         }

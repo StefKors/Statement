@@ -19,7 +19,7 @@ class BaseFilterModel: Identifiable {
     /// - Parameter image: image to process
     func processImage(_ image: EditorImage) {
         // Data to CIImage
-        guard let inputImage = CIImage(data: image.data) else { return }
+        guard let inputImage = CIImage(data: image.data, options: [.applyOrientationProperty:true]) else { return }
         // Apply filter to CIImage
         guard let outputImage = applyFilter(inputImage) else { return }
         // CIImage to CGImage

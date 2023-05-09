@@ -44,7 +44,7 @@ struct ContentView: View {
                 }
                 .formStyle(.grouped)
             }
-            .frame(maxWidth: 280)
+            .frame(width: 280)
         }
         .scenePadding()
         
