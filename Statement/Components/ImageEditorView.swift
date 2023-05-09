@@ -19,33 +19,34 @@ struct ImageEditorView: View {
                             .scaledToFit()
                     },
                     clippedContent: {
-                        ZStack {
-                            ImageView(imageState: model.filterImageState)
-                                .scaledToFit()
-                                // .blendMode(.colorDodge)
-                                .overlay {
-                                    Rectangle().stroke(lineWidth: 20)
-                                }
-
-                            if let image = model.editedImage {
-                                image
-                                    .scaledToFit()
-                                    .frame(width: 400, height: 400)
-                            } else {
-                                Text("❌")
-                            }
-
-                        }
+                        EmptyView()
+                        // ZStack {
+                        //     ImageView(imageState: model.filterImageState)
+                        //         .scaledToFit()
+                        //         // .blendMode(.colorDodge)
+                        //         .overlay {
+                        //             Rectangle().stroke(lineWidth: 20)
+                        //         }
+                        //
+                        //     if let image = model.editedImage {
+                        //         image
+                        //             .scaledToFit()
+                        //             .frame(width: 400, height: 400)
+                        //     } else {
+                        //         Text("❌")
+                        //     }
+                        //
+                        // }
                     })
 
                 VStack(alignment: .leading) {
-                    ForEach(Model.ImageFilter.allCases, id: \.self) { filter in
-                        Button {
-                            model.applyFilter(type: filter)
-                        } label: {
-                            Label("Apply \(filter.rawValue)", systemImage: "camera.filters")
-                        }
-                    }
+                    // ForEach(Model.ImageFilter.allCases, id: \.self) { filter in
+                    //     Button {
+                    //         model.applyFilter(type: filter)
+                    //     } label: {
+                    //         Label("Apply \(filter.rawValue)", systemImage: "camera.filters")
+                    //     }
+                    // }
                 }
             }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ImageView: View {
-    let imageState: Model.ImageState
+    let imageState: ImageState
 
     var body: some View {
         switch imageState {
@@ -35,7 +35,7 @@ enum PreviewError: Error {
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ImageView(imageState: .success(Model.EditorImage(image: Image(systemName: "photo"), data: Data())))
+            ImageView(imageState: .success(EditorImage(image: Image(systemName: "photo"), data: Data())))
                 .scaledToFill()
                 .clipShape(RoundedRectangle(cornerRadius: 6))
                 .frame(width: 100, height: 100)
