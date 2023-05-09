@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct SepiaFilterControlsView: View {
-    @EnvironmentObject private var model: SepiaModel
+    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var filterModel: SepiaModel
 
     var image: EditorImage? = nil
 
     private let step: Float.Stride = 0.1
-
+    @State private var showFilter: Bool = false
     var body: some View {
         Section {
-            Toggle("Show/Hide", isOn: $model.showFilter)
             Slider(
-                value: $model.intensityAdjustment,
+                value: $filterModel.intensityAdjustment,
                 in: 0...1,
                 step: step
             ) {
@@ -28,15 +28,15 @@ struct SepiaFilterControlsView: View {
             } maximumValueLabel: {
                 Text("1")
             }
-
-            Button("Apply Filter") {
+            .onChange(of: filterModel.intensityAdjustment) { _ in
                 guard let image else { return }
-                model.processImage(image)
+                model.enabledFilter = filterModel.type
+                model.filteredImageState = filterModel.processImage(image)
             }
-            .disabled(image == nil)
         } header: {
             Text("Sepia Filter")
         }
+        .disabled(image == nil)
     }
 }
 

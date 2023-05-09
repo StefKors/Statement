@@ -23,16 +23,9 @@ struct ImageEditorView: View {
                     },
                     clippedContent: {
                         ZStack {
-                            if let image = model.imageState.image {
-                                ForEach([sepiaFilter, colorCubeFilter, adjustableColorCubeFilter]) { filter in
-                                    if filter.showFilter {
-                                        ImageView(imageState: filter.imageState)
-                                            .scaledToFit()
-                                            .task {
-                                                filter.processImage(image)
-                                            }
-                                    }
-                                }
+                            if let image = model.filteredImageState.image {
+                                ImageView(imageState: model.filteredImageState)
+                                    .scaledToFit()
                             }
                         }
                     })

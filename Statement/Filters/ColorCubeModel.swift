@@ -18,11 +18,7 @@ enum LutImage: String, CaseIterable {
 class ColorCubeModel: BaseFilterModel, ObservableObject {
     @Published var selectedImage: LutImage = .lut1
 
-    override init() {
-        super.init()
-        // show by default
-        self.showFilter = true
-    }
+    let type: FilterType = .colorCube
 
     override func applyFilter(_ inputImage: CIImage) -> CIImage? {
         let currentFilter = CIFilter.colorCube()

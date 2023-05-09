@@ -8,8 +8,23 @@
 import SwiftUI
 
 struct LutImagePickerView: View {
+    @EnvironmentObject private var model: Model
+
     let lut: LutImage
     let isSelected: Bool
+
+    var color: Color {
+        if isSelected {
+            if model.enabledFilter == .colorCube {
+                return Color.accentColor
+            }
+
+            return Color.secondary
+        }
+
+        return Color.clear
+
+    }
 
     var body: some View {
         HStack {
@@ -20,19 +35,18 @@ struct LutImagePickerView: View {
                 .frame(width: 80, height: 80)
                 .cornerRadius(6)
                 .overlay {
-                    if isSelected {
-                        RoundedRectangle(cornerRadius: 6)
-                            .stroke(Color.accentColor, lineWidth: 3)
-                    }
+                    RoundedRectangle(cornerRadius: 6)
+                        .stroke(color, lineWidth: 3)
                 }
-                .shadow(color: isSelected ? Color.accentColor : .clear, radius: 5, x: 0, y: 2)
+                .shadow(color: color, radius: 5, x: 0, y: 2)
             Spacer()
         }
     }
 }
 
 struct ColorCubeFilterControlsView: View {
-    @EnvironmentObject private var model: ColorCubeModel
+    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var filterModel: ColorCubeModel
 
     var image: EditorImage? = nil
 
@@ -40,30 +54,23 @@ struct ColorCubeFilterControlsView: View {
 
     var body: some View {
         Section {
-            Toggle("Show/Hide", isOn: $model.showFilter)
-
             HStack {
                 ForEach(LutImage.allCases, id: \.self) { lut in
-                    LutImagePickerView(lut: lut, isSelected: model.selectedImage == lut)
+                    LutImagePickerView(lut: lut, isSelected: filterModel.selectedImage == lut)
                         .onTapGesture {
                             withAnimation(.easeIn(duration: 0.15)) {
-                                model.selectedImage = lut
-                                if let image {
-                                    model.processImage(image)
-                                }
+                                filterModel.selectedImage = lut
+                                guard let image else { return }
+                                model.enabledFilter = filterModel.type
+                                model.filteredImageState = filterModel.processImage(image)
                             }
                         }
                 }
             }
-
-            Button("Apply Filter") {
-                guard let image else { return }
-                model.processImage(image)
-            }
-            .disabled(image == nil)
         } header: {
             Text("ColorCube Filter")
         }
+        .disabled(image == nil)
     }
 }
 

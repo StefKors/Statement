@@ -12,6 +12,8 @@ import CoreImage.CIFilterBuiltins
 class SepiaModel: BaseFilterModel, ObservableObject {
     @Published var intensityAdjustment: Float = 1
 
+    let type: FilterType = .sepia
+
     override func applyFilter(_ inputImage: CIImage) -> CIImage? {
         let currentFilter = CIFilter.sepiaTone()
         currentFilter.inputImage = inputImage

@@ -9,10 +9,10 @@ import SwiftUI
 
 @main
 struct StatementApp: App {
-    @StateObject private var model = Model()
-    @StateObject private var colorCubeFilter = ColorCubeModel()
-    @StateObject private var adjustableColorCubeFilter = AdjustableColorCubeModel()
-    @StateObject private var sepiaFilter = SepiaModel()
+    @StateObject var model = Model()
+    @StateObject var colorCubeFilter = ColorCubeModel()
+    @StateObject var adjustableColorCubeFilter = AdjustableColorCubeModel()
+    @StateObject var sepiaFilter = SepiaModel()
 
     var body: some Scene {
         WindowGroup("Statement") {

@@ -11,6 +11,12 @@ import AppKit
 import PhotosUI
 import CoreTransferable
 
+enum FilterType: String, CaseIterable {
+    case colorCube
+    case adjustableColorCube
+    case sepia
+}
+
 @MainActor
 class Model: ObservableObject {
     internal init() {
@@ -37,6 +43,8 @@ class Model: ObservableObject {
             }
         }
     }
+    @Published var enabledFilter: FilterType = .colorCube
+    @Published var filteredImageState: ImageState = .empty
 
     private func loadTransferable(from imageSelection: PhotosPickerItem) -> Progress {
         return imageSelection.loadTransferable(type: EditorImage.self) { result in

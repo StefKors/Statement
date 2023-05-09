@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AdjustableColorCubeFilterControlsView: View {
-    @EnvironmentObject private var model: AdjustableColorCubeModel
+    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var filterModel: AdjustableColorCubeModel
 
     var image: EditorImage? = nil
 
@@ -16,9 +17,8 @@ struct AdjustableColorCubeFilterControlsView: View {
 
     var body: some View {
         Section {
-            Toggle("Show/Hide", isOn: $model.showFilter)
             Slider(
-                value: $model.brightnessAdjustment,
+                value: $filterModel.brightnessAdjustment,
                 in: 0...1,
                 step: step
             ) {
@@ -28,9 +28,14 @@ struct AdjustableColorCubeFilterControlsView: View {
             } maximumValueLabel: {
                 Text("1")
             }
+            .onChange(of: filterModel.brightnessAdjustment) { _ in
+                guard let image else { return }
+                model.enabledFilter = filterModel.type
+                model.filteredImageState = filterModel.processImage(image)
+            }
 
             Slider(
-                value: $model.saturationAdjustment,
+                value: $filterModel.saturationAdjustment,
                 in: 0...1,
                 step: step
             ) {
@@ -40,9 +45,14 @@ struct AdjustableColorCubeFilterControlsView: View {
             } maximumValueLabel: {
                 Text("1")
             }
+            .onChange(of: filterModel.saturationAdjustment) { _ in
+                guard let image else { return }
+                model.enabledFilter = filterModel.type
+                model.filteredImageState = filterModel.processImage(image)
+            }
 
             Slider(
-                value: $model.destCenterHueAngle,
+                value: $filterModel.destCenterHueAngle,
                 in: 0...1,
                 step: step
             ) {
@@ -52,15 +62,15 @@ struct AdjustableColorCubeFilterControlsView: View {
             } maximumValueLabel: {
                 Text("1")
             }
-
-            Button("Apply Filter") {
+            .onChange(of: filterModel.destCenterHueAngle) { _ in
                 guard let image else { return }
-                model.processImage(image)
+                model.enabledFilter = filterModel.type
+                model.filteredImageState = filterModel.processImage(image)
             }
-            .disabled(image == nil)
         } header: {
-            Text("ColorCube Filter")
-        }        
+            Text("Adjustable ColorCube Filter")
+        }
+        .disabled(image == nil)
     }
 }
 

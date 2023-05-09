@@ -15,6 +15,8 @@ class AdjustableColorCubeModel: BaseFilterModel, ObservableObject {
     @Published var saturationAdjustment: Float = 0
     @Published var destCenterHueAngle: Float = 0.57
 
+    let type: FilterType = .adjustableColorCube
+
     override func applyFilter(_ inputImage: CIImage) -> CIImage? {
         let currentFilter = CIFilter.colorCube()
         currentFilter.cubeData = createCubeData()
