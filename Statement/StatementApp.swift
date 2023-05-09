@@ -9,11 +9,16 @@ import SwiftUI
 
 @main
 struct StatementApp: App {
-    @StateObject var model = Model()
+    @StateObject private var model = Model()
+    @StateObject private var colorCubeFilter = ColorCubeModel()
+    @StateObject private var sepiaFilter = SepiaModel()
+
     var body: some Scene {
         WindowGroup("Statement") {
             ContentView()
                 .environmentObject(model)
+                .environmentObject(sepiaFilter)
+                .environmentObject(colorCubeFilter)
                 .buttonStyle(.regularButtonStyle)
                 .navigationTitle("Statement")
         }

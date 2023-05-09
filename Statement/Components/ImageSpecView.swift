@@ -20,6 +20,8 @@ struct ImageSpecView: View {
                 }
                 Text(label)
             }
+            .padding(.vertical, 4)
+            .padding(.horizontal, 6)
         }
         .background(RoundedRectangle(cornerRadius: 6).fill(.background))
     }

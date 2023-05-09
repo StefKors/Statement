@@ -28,6 +28,13 @@
 		8A88571E2A0A5D1000397B3C /* BaseFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88571D2A0A5D1000397B3C /* BaseFilterModel.swift */; };
 		8A8857222A0A5DD600397B3C /* EditorImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857212A0A5DD600397B3C /* EditorImage.swift */; };
 		8A8857242A0A5DF200397B3C /* ImageState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857232A0A5DF200397B3C /* ImageState.swift */; };
+		8A8857292A0A606F00397B3C /* ColorCubeFilterControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857282A0A606F00397B3C /* ColorCubeFilterControlsView.swift */; };
+		8A88572B2A0A60AD00397B3C /* SepiaFilterControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88572A2A0A60AD00397B3C /* SepiaFilterControlsView.swift */; };
+		8A88572D2A0A743100397B3C /* ExifDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88572C2A0A743100397B3C /* ExifDataView.swift */; };
+		8A88572F2A0A7D5800397B3C /* Rational.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88572E2A0A7D5800397B3C /* Rational.swift */; };
+		8A8857312A0A80B300397B3C /* MapPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857302A0A80B300397B3C /* MapPinView.swift */; };
+		8A8857332A0A8C6F00397B3C /* MapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857322A0A8C6F00397B3C /* MapLocation.swift */; };
+		8A8857352A0A8C9600397B3C /* Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857342A0A8C9600397B3C /* Exif.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +62,13 @@
 		8A88571D2A0A5D1000397B3C /* BaseFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFilterModel.swift; sourceTree = "<group>"; };
 		8A8857212A0A5DD600397B3C /* EditorImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorImage.swift; sourceTree = "<group>"; };
 		8A8857232A0A5DF200397B3C /* ImageState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageState.swift; sourceTree = "<group>"; };
+		8A8857282A0A606F00397B3C /* ColorCubeFilterControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCubeFilterControlsView.swift; sourceTree = "<group>"; };
+		8A88572A2A0A60AD00397B3C /* SepiaFilterControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SepiaFilterControlsView.swift; sourceTree = "<group>"; };
+		8A88572C2A0A743100397B3C /* ExifDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExifDataView.swift; sourceTree = "<group>"; };
+		8A88572E2A0A7D5800397B3C /* Rational.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rational.swift; sourceTree = "<group>"; };
+		8A8857302A0A80B300397B3C /* MapPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPinView.swift; sourceTree = "<group>"; };
+		8A8857322A0A8C6F00397B3C /* MapLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocation.swift; sourceTree = "<group>"; };
+		8A8857342A0A8C9600397B3C /* Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exif.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +108,8 @@
 				8A8856FB2A09197D00397B3C /* Components */,
 				8A8856F92A09184600397B3C /* Model.swift */,
 				8A8857212A0A5DD600397B3C /* EditorImage.swift */,
+				8A8857342A0A8C9600397B3C /* Exif.swift */,
+				8A8857322A0A8C6F00397B3C /* MapLocation.swift */,
 				8A8857232A0A5DF200397B3C /* ImageState.swift */,
 				8A8856ED2A090EE700397B3C /* Assets.xcassets */,
 				8A8856F22A090EE700397B3C /* Info.plist */,
@@ -114,6 +130,7 @@
 		8A8856FB2A09197D00397B3C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8A8857272A0A605B00397B3C /* FilterControls */,
 				8A8856FC2A09198700397B3C /* DottedBackgroundView.swift */,
 				8A8857032A091EF300397B3C /* PaperStackView.swift */,
 				8A8857052A0926B100397B3C /* OpenPhotosButtonView.swift */,
@@ -122,6 +139,8 @@
 				8A8857092A092A3A00397B3C /* ImageEditorView.swift */,
 				8A8857152A0954CB00397B3C /* ImageSpecView.swift */,
 				8A88570D2A0933B800397B3C /* ResizableView.swift */,
+				8A88572C2A0A743100397B3C /* ExifDataView.swift */,
+				8A8857302A0A80B300397B3C /* MapPinView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -129,6 +148,7 @@
 		8A8856FE2A091CD400397B3C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8A88572E2A0A7D5800397B3C /* Rational.swift */,
 				8A8857172A0A55E900397B3C /* RGBtoHSV.swift */,
 				8A8857012A091E5200397B3C /* ButtonStyleRegular.swift */,
 				8A8856FF2A091CDB00397B3C /* Color.swift */,
@@ -144,6 +164,15 @@
 				8A88571D2A0A5D1000397B3C /* BaseFilterModel.swift */,
 			);
 			path = Filters;
+			sourceTree = "<group>";
+		};
+		8A8857272A0A605B00397B3C /* FilterControls */ = {
+			isa = PBXGroup;
+			children = (
+				8A8857282A0A606F00397B3C /* ColorCubeFilterControlsView.swift */,
+				8A88572A2A0A60AD00397B3C /* SepiaFilterControlsView.swift */,
+			);
+			path = FilterControls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,9 +248,11 @@
 				8A8857082A09286200397B3C /* ImageView.swift in Sources */,
 				8A8857042A091EF300397B3C /* PaperStackView.swift in Sources */,
 				8A8857222A0A5DD600397B3C /* EditorImage.swift in Sources */,
+				8A8857312A0A80B300397B3C /* MapPinView.swift in Sources */,
 				8A8857022A091E5200397B3C /* ButtonStyleRegular.swift in Sources */,
 				8A88570A2A092A3A00397B3C /* ImageEditorView.swift in Sources */,
 				8A8857062A0926B100397B3C /* OpenPhotosButtonView.swift in Sources */,
+				8A8857352A0A8C9600397B3C /* Exif.swift in Sources */,
 				8A8856E82A090EE700397B3C /* StatementApp.swift in Sources */,
 				8A8856EC2A090EE700397B3C /* ContentView.swift in Sources */,
 				8A8856FD2A09198700397B3C /* DottedBackgroundView.swift in Sources */,
@@ -233,8 +264,13 @@
 				8A8857002A091CDB00397B3C /* Color.swift in Sources */,
 				8A8857242A0A5DF200397B3C /* ImageState.swift in Sources */,
 				8A88570C2A092E3F00397B3C /* OpenPhotosToolbarButtonView.swift in Sources */,
+				8A8857292A0A606F00397B3C /* ColorCubeFilterControlsView.swift in Sources */,
+				8A88572D2A0A743100397B3C /* ExifDataView.swift in Sources */,
+				8A88572B2A0A60AD00397B3C /* SepiaFilterControlsView.swift in Sources */,
+				8A8857332A0A8C6F00397B3C /* MapLocation.swift in Sources */,
 				8A88571A2A0A57B400397B3C /* ColorCubeModel.swift in Sources */,
 				8A88570E2A0933B800397B3C /* ResizableView.swift in Sources */,
+				8A88572F2A0A7D5800397B3C /* Rational.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

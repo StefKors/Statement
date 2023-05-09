@@ -12,4 +12,9 @@ enum ImageState {
     case loading(Progress)
     case success(EditorImage)
     case failure(Error)
+
+    var image: EditorImage? {
+        guard case let .success(image) = self else { return nil }
+        return image
+    }
 }

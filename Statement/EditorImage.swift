@@ -14,6 +14,7 @@ enum TransferError: Error {
 struct EditorImage: Transferable {
     let image: Image
     let data: Data
+    let exif: Exif
 
     static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(importedContentType: .image) { data in
@@ -21,7 +22,8 @@ struct EditorImage: Transferable {
                 throw TransferError.importFailed
             }
             let image = Image(nsImage: nsImage)
-            return EditorImage(image: image, data: data)
+            let exif = Exif(data: data)
+            return EditorImage(image: image, data: data, exif: exif)
         }
     }
 }

@@ -12,22 +12,40 @@ struct ContentView: View {
     @EnvironmentObject private var model: Model
 
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 6)
-                .fill(.clear)
+        HStack {
+            ZStack {
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(.clear)
 
-            switch model.imageState {
-            case .empty:
-                OpenPhotosButtonView()
-                    .navigationSubtitle("Open Photo")
+                switch model.imageState {
+                case .empty:
+                    OpenPhotosButtonView()
+                        .navigationSubtitle("Open Photo")
 
-            default:
-                ImageEditorView()
-                    .navigationSubtitle("Edit Photo")
+                default:
+                    ImageEditorView()
+                        .navigationSubtitle("Edit Photo")
+                }
             }
+            .padding()
+            .dottedBackgroundPattern()
+
+            VStack {
+                Form {
+                    SepiaFilterControlsView(image: model.imageState.image)
+                    ColorCubeFilterControlsView(image: model.imageState.image)
+
+                    if let exif =  model.imageState.image?.exif {
+                        Section("Exif Data") {
+                            ExifDataView(exif: exif)
+                        }
+
+                    }
+                }
+                .formStyle(.grouped)
+            }
+            .frame(maxWidth: 280)
         }
-        .padding()
-        .dottedBackgroundPattern()
         .scenePadding()
         
     }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ImageEditorView: View {
     @EnvironmentObject private var model: Model
+    @EnvironmentObject private var colorCubeFilter: ColorCubeModel
+    @EnvironmentObject private var sepiaFilter: SepiaModel
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,44 +21,21 @@ struct ImageEditorView: View {
                             .scaledToFit()
                     },
                     clippedContent: {
-                        EmptyView()
-                        // ZStack {
-                        //     ImageView(imageState: model.filterImageState)
-                        //         .scaledToFit()
-                        //         // .blendMode(.colorDodge)
-                        //         .overlay {
-                        //             Rectangle().stroke(lineWidth: 20)
-                        //         }
-                        //
-                        //     if let image = model.editedImage {
-                        //         image
-                        //             .scaledToFit()
-                        //             .frame(width: 400, height: 400)
-                        //     } else {
-                        //         Text("❌")
-                        //     }
-                        //
-                        // }
+                        ZStack {
+                            if model.imageState.image != nil {
+                                ForEach([sepiaFilter, colorCubeFilter]) { filter in
+                                    if filter.showFilter {
+                                        ImageView(imageState: filter.imageState)
+                                            .scaledToFit()
+                                            .overlay {
+                                                Rectangle().stroke(lineWidth: 20)
+                                            }
+                                    }
+                                }
+                            }
+                        }
                     })
-
-                VStack(alignment: .leading) {
-                    // ForEach(Model.ImageFilter.allCases, id: \.self) { filter in
-                    //     Button {
-                    //         model.applyFilter(type: filter)
-                    //     } label: {
-                    //         Label("Apply \(filter.rawValue)", systemImage: "camera.filters")
-                    //     }
-                    // }
-                }
             }
-
-            HStack {
-                ImageSpecView(label: "\u{0192}1.8")
-                ImageSpecView(label: "1/2500s")
-                ImageSpecView(label: "ISO 20", systemImage: "camera.aperture")
-            }
-            .fontDesign(.monospaced)
-
         }
         .toolbar(content: {
             ToolbarItem(placement: .primaryAction) {

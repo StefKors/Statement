@@ -19,7 +19,8 @@ class Model: ObservableObject {
                 return
             }
             let image = Image(nsImage: nsImage)
-            self.imageState = .success(EditorImage(image: image, data: data))
+            let exif = Exif(data: data)
+            self.imageState = .success(EditorImage(image: image, data: data, exif: exif))
         }
     }
 

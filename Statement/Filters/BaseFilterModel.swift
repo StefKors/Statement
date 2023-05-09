@@ -10,8 +10,10 @@ import SwiftUI
 import CoreImage
 import CoreImage.CIFilterBuiltins
 
-class BaseFilterModel {
+class BaseFilterModel: Identifiable {
+    let id = UUID()
     @Published private(set) var imageState: ImageState = .empty
+    @Published var showFilter: Bool = false
 
     /// Process provided image and apply filter
     /// - Parameter image: image to process
@@ -28,10 +30,14 @@ class BaseFilterModel {
         let image = Image(nsImage: nsImage)
         // NSImage to Data
         guard let data = nsImage.tiffRepresentation else { return }
+        // Get Exif from Data
+        let exif = Exif(data: data)
         // Create EditorImage
-        let editorImage = EditorImage(image: image, data: data)
+        let editorImage = EditorImage(image: image, data: data, exif: exif)
         // Update Image State
         self.imageState = .success(editorImage)
+        // Show Filter layer
+        self.showFilter = true
     }
 
     /// Override to apply parent class filter, otherwise returns unedited image
