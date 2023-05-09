@@ -13,18 +13,21 @@ struct SaveImageToolbarButtonView: View {
     var body: some View {
         Button("Save Photo") {
             //
-            let url = showSavePanel()
+            guard let url = showSavePanel() else { return }
             print(url)
 
-            // guard let tiffRepresentation = tiffRepresentation, let bitmapImage = NSBitmapImageRep(data: tiffRepresentation) else { return nil }
-            // let pngData = bitmapImage.representation(using: .png, properties: [:])
-            // do {
-            //     try pngData?.write(to: url, options: options)
-            //     return true
-            // } catch {
-            //     print(error)
-            //     return false
-            // }
+            guard let image = model.filteredImageState.image else { return }
+            guard let nsImage = NSImage(data: image.data) else { return }
+            guard let tiffRepresentation = nsImage.tiffRepresentation, let bitmapImage = NSBitmapImageRep(data: tiffRepresentation) else { return }
+            let pngData = bitmapImage.representation(using: .png, properties: [:])
+            do {
+                try pngData?.write(to: url, options: [])
+                return
+            } catch {
+                print(error)
+                return
+            }
+
         }
     }
 

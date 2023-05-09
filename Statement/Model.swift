@@ -15,6 +15,7 @@ enum FilterType: String, CaseIterable {
     case colorCube
     case adjustableColorCube
     case sepia
+    case none
 }
 
 @MainActor

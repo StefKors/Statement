@@ -74,6 +74,7 @@ struct ResizingView<ClippedContent: View>: View {
 
 
 struct ResizableView<FullContent: View, ClippedContent: View>: View {
+    @EnvironmentObject private var model: Model
     let fullContent: () -> FullContent
     let clippedContent: () -> ClippedContent
 
@@ -94,8 +95,10 @@ struct ResizableView<FullContent: View, ClippedContent: View>: View {
     var body: some View {
         fullContent()
             .overlay {
-                GeometryReader { geo in
-                    ResizingView(clippedContent: { clippedContent() }, geo: geo)
+                if model.enabledFilter != .none {
+                    GeometryReader { geo in
+                        ResizingView(clippedContent: { clippedContent() }, geo: geo)
+                    }
                 }
             }
             .mask(alignment: .leading) {

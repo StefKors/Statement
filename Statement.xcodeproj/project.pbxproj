@@ -38,6 +38,7 @@
 		8A8857372A0A9C1F00397B3C /* AdjustableColorCubeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857362A0A9C1F00397B3C /* AdjustableColorCubeModel.swift */; };
 		8A8857392A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857382A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift */; };
 		8A88573C2A0AA50300397B3C /* SaveImageToolbarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88573B2A0AA50300397B3C /* SaveImageToolbarButtonView.swift */; };
+		8A88573E2A0ABA4300397B3C /* CancelFilterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88573D2A0ABA4300397B3C /* CancelFilterButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		8A8857362A0A9C1F00397B3C /* AdjustableColorCubeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustableColorCubeModel.swift; sourceTree = "<group>"; };
 		8A8857382A0A9D6500397B3C /* AdjustableColorCubeFilterControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustableColorCubeFilterControlsView.swift; sourceTree = "<group>"; };
 		8A88573B2A0AA50300397B3C /* SaveImageToolbarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveImageToolbarButtonView.swift; sourceTree = "<group>"; };
+		8A88573D2A0ABA4300397B3C /* CancelFilterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelFilterButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				8A88572C2A0A743100397B3C /* ExifDataView.swift */,
 				8A8857272A0A605B00397B3C /* FilterControls */,
 				8A8857092A092A3A00397B3C /* ImageEditorView.swift */,
+				8A88573D2A0ABA4300397B3C /* CancelFilterButtonView.swift */,
 				8A88573B2A0AA50300397B3C /* SaveImageToolbarButtonView.swift */,
 				8A8857152A0954CB00397B3C /* ImageSpecView.swift */,
 				8A8857072A09286200397B3C /* ImageView.swift */,
@@ -266,6 +269,7 @@
 				8A8857042A091EF300397B3C /* PaperStackView.swift in Sources */,
 				8A8857222A0A5DD600397B3C /* EditorImage.swift in Sources */,
 				8A8857312A0A80B300397B3C /* MapPinView.swift in Sources */,
+				8A88573E2A0ABA4300397B3C /* CancelFilterButtonView.swift in Sources */,
 				8A88573C2A0AA50300397B3C /* SaveImageToolbarButtonView.swift in Sources */,
 				8A8857022A091E5200397B3C /* ButtonStyleRegular.swift in Sources */,
 				8A88570A2A092A3A00397B3C /* ImageEditorView.swift in Sources */,

@@ -23,7 +23,7 @@ struct ImageEditorView: View {
                     },
                     clippedContent: {
                         ZStack {
-                            if let image = model.filteredImageState.image {
+                            if model.filteredImageState.image != nil {
                                 ImageView(imageState: model.filteredImageState)
                                     .scaledToFit()
                             }
@@ -31,7 +31,28 @@ struct ImageEditorView: View {
                     })
             }
         }
+        .task {
+            guard let image = model.imageState.image else { return }
+            switch model.enabledFilter {
+            case .adjustableColorCube:
+                self.model.filteredImageState = adjustableColorCubeFilter.processImage(image)
+            case .colorCube:
+                self.model.filteredImageState = colorCubeFilter.processImage(image)
+            case .sepia:
+                self.model.filteredImageState = sepiaFilter.processImage(image)
+            case .none:
+                print("do nothing")
+            }
+        }
         .toolbar(content: {
+            ToolbarItem(placement: .primaryAction) {
+                CancelFilterButtonView()
+            }
+
+            ToolbarItem(placement: .primaryAction) {
+                SaveImageToolbarButtonView()
+            }
+
             ToolbarItem(placement: .primaryAction) {
                 OpenPhotosToolbarButtonView()
             }
