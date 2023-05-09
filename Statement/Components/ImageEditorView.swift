@@ -22,13 +22,13 @@ struct ImageEditorView: View {
                     },
                     clippedContent: {
                         ZStack {
-                            if model.imageState.image != nil {
+                            if let image = model.imageState.image {
                                 ForEach([sepiaFilter, colorCubeFilter]) { filter in
                                     if filter.showFilter {
                                         ImageView(imageState: filter.imageState)
                                             .scaledToFit()
-                                            .overlay {
-                                                Rectangle().stroke(lineWidth: 20)
+                                            .task {
+                                                filter.processImage(image)
                                             }
                                     }
                                 }

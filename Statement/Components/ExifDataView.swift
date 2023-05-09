@@ -28,42 +28,42 @@ struct ExifDataView: View {
                     }
                 }
 
-                Divider()
-
-                LazyHGrid(rows: [GridItem(.flexible())], alignment: .center) {
-                    if let iso = exif.ISOSpeedRatings?.first {
-                        Spacer()
-                        Text("ISO \(iso)")
-                        Spacer()
-                        Divider()
+                if exif.focalLenIn35mmFilm != nil {
+                    LazyHGrid(rows: [GridItem(.flexible())], alignment: .center) {
+                        if let iso = exif.ISOSpeedRatings?.first {
+                            Spacer()
+                            Text("ISO \(iso)")
+                            Spacer()
+                            Divider()
+                        }
+                        
+                        if let focalLength = exif.focalLenIn35mmFilm {
+                            Spacer()
+                            Text("\(focalLength) mm")
+                            Spacer()
+                            Divider()
+                        }
+                        if let exposureBias = exif.exposureBias {
+                            Spacer()
+                            Text("\(exposureBias) ev")
+                            Spacer()
+                            Divider()
+                        }
+                        if let aperture = exif.aperture?.decimals(2) {
+                            Spacer()
+                            Text("\u{0192}\(aperture)")
+                            Spacer()
+                            Divider()
+                        }
+                        if let rationale = exif.exposureTime?.toExposureRational() {
+                            Spacer()
+                            Text("\(rationale) s")
+                            Spacer()
+                        }
                     }
-
-                    if let focalLength = exif.focalLenIn35mmFilm {
-                        Spacer()
-                        Text("\(focalLength) mm")
-                        Spacer()
-                        Divider()
-                    }
-                    if let exposureBias = exif.exposureBias {
-                        Spacer()
-                        Text("\(exposureBias) ev")
-                        Spacer()
-                        Divider()
-                    }
-                    if let aperture = exif.aperture?.decimals(2) {
-                        Spacer()
-                        Text("\u{0192}\(aperture)")
-                        Spacer()
-                        Divider()
-                    }
-                    if let rationale = exif.exposureTime?.toExposureRational() {
-                        Spacer()
-                        Text("\(rationale) s")
-                        Spacer()
-                    }
+                    .padding(.bottom, 4)
+                    .frame(maxHeight: 12)
                 }
-                .padding(.bottom, 4)
-                .frame(maxHeight: 12)
 
                 if let location = exif.location {
                     MapPinView(location: location)

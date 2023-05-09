@@ -43,8 +43,8 @@ struct ContentView: View {
                     }
                 }
                 .formStyle(.grouped)
+                .frame(width: 280)
             }
-            .frame(width: 280)
         }
         .scenePadding()
         
