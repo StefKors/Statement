@@ -19,12 +19,23 @@ struct ImageEditorView: View {
                             .scaledToFit()
                     },
                     clippedContent: {
-                        ImageView(imageState: model.filterImageState)
-                            .scaledToFit()
-                            .blendMode(.colorDodge)
-                            .overlay {
-                                Rectangle().stroke(lineWidth: 20)
+                        ZStack {
+                            ImageView(imageState: model.filterImageState)
+                                .scaledToFit()
+                                // .blendMode(.colorDodge)
+                                .overlay {
+                                    Rectangle().stroke(lineWidth: 20)
+                                }
+
+                            if let image = model.editedImage {
+                                image
+                                    .scaledToFit()
+                                    .frame(width: 400, height: 400)
+                            } else {
+                                Text("❌")
                             }
+
+                        }
                     })
 
                 VStack(alignment: .leading) {

@@ -23,6 +23,7 @@
 		8A88570C2A092E3F00397B3C /* OpenPhotosToolbarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88570B2A092E3F00397B3C /* OpenPhotosToolbarButtonView.swift */; };
 		8A88570E2A0933B800397B3C /* ResizableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88570D2A0933B800397B3C /* ResizableView.swift */; };
 		8A8857162A0954CB00397B3C /* ImageSpecView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857152A0954CB00397B3C /* ImageSpecView.swift */; };
+		8A8857182A0A55E900397B3C /* RGBtoHSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857172A0A55E900397B3C /* RGBtoHSV.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		8A88570B2A092E3F00397B3C /* OpenPhotosToolbarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenPhotosToolbarButtonView.swift; sourceTree = "<group>"; };
 		8A88570D2A0933B800397B3C /* ResizableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableView.swift; sourceTree = "<group>"; };
 		8A8857152A0954CB00397B3C /* ImageSpecView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSpecView.swift; sourceTree = "<group>"; };
+		8A8857172A0A55E900397B3C /* RGBtoHSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RGBtoHSV.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 		8A8856FE2A091CD400397B3C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8A8857172A0A55E900397B3C /* RGBtoHSV.swift */,
 				8A8857012A091E5200397B3C /* ButtonStyleRegular.swift */,
 				8A8856FF2A091CDB00397B3C /* Color.swift */,
 			);
@@ -202,6 +205,7 @@
 				8A8856E82A090EE700397B3C /* StatementApp.swift in Sources */,
 				8A8856EC2A090EE700397B3C /* ContentView.swift in Sources */,
 				8A8856FD2A09198700397B3C /* DottedBackgroundView.swift in Sources */,
+				8A8857182A0A55E900397B3C /* RGBtoHSV.swift in Sources */,
 				8A8857162A0954CB00397B3C /* ImageSpecView.swift in Sources */,
 				8A8856FA2A09184600397B3C /* Model.swift in Sources */,
 				8A8857002A091CDB00397B3C /* Color.swift in Sources */,
