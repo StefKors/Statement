@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Commitment/Assets.xcassets/AppIcon.appiconset/Large Icon1024.png" height="128">
+  <img src="Statement/Assets.xcassets/AppIcon.appiconset/Large Icon1024.png" height="128">
   <h1 align="center">Statement</h1>
 </p>
 
