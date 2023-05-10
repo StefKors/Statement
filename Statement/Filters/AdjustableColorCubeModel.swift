@@ -75,7 +75,7 @@ class AdjustableColorCubeModel: BaseFilterModel, ObservableObject {
                 }
             }
         }
-        // print(cubeData)
+
         let b = cubeData.withUnsafeBufferPointer { Data(buffer: $0) }
         let data = b as Data
         return data

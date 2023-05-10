@@ -7,13 +7,12 @@
 
 import SwiftUI
 
-struct LutImagePickerView: View {
+struct LutImageStyle: ViewModifier {
     @EnvironmentObject private var model: Model
 
-    let lut: LutImage
     let isSelected: Bool
 
-    var color: Color {
+    private var color: Color {
         if isSelected {
             if model.enabledFilter == .colorCube {
                 return Color.accentColor
@@ -26,9 +25,8 @@ struct LutImagePickerView: View {
 
     }
 
-    var body: some View {
-        Image(lut.rawValue)
-            .resizable()
+    func body(content: Content) -> some View {
+        content
             .scaledToFill()
             .frame(width: 63, height: 63)
             .cornerRadius(6)
@@ -37,6 +35,26 @@ struct LutImagePickerView: View {
                     .stroke(color, lineWidth: 3)
             }
             .shadow(color: color, radius: 5, x: 0, y: 2)
+    }
+}
+
+extension View {
+    func lutImageStyle(_ isSelected: Bool) -> some View {
+        modifier(LutImageStyle(isSelected: isSelected))
+    }
+}
+
+struct LutImagePickerView: View {
+    @EnvironmentObject private var model: Model
+
+    let lut: LutImage
+
+    let isSelected: Bool
+
+    var body: some View {
+        Image(lut.rawValue)
+            .resizable()
+            .lutImageStyle(isSelected)
     }
 }
 

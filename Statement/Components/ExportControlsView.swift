@@ -28,8 +28,6 @@ struct ExportControlsView: View {
                 Text("File Type")
             }
 
-
-
             Picker(selection: $exportCompression) {
                 ForEach(ImageDocument.exportCompressionTypes, id: \.rawValue) { type in
                     Text(NSBitmapImageRep.localizedName(forTIFFCompressionType: type) ?? "")
@@ -40,7 +38,7 @@ struct ExportControlsView: View {
             }
             .pickerStyle(.menu)
 
-            Button("Export Photo") {
+            SuccessEmojiButton(label: "Export Photo") {
                 isSaving.toggle()
             }
             .fileExporter(

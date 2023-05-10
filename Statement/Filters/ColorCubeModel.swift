@@ -15,7 +15,22 @@ enum LutImage: String, CaseIterable {
     case lut1 = "lut-1"
     case lut2 = "lut-2"
     case lut3 = "lut-3"
+    case custom
 }
+
+enum LutError: Error {
+    case invalidLutImage
+}
+
+extension LutError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .invalidLutImage:
+            return NSLocalizedString("Invalid LUT", comment: "")
+        }
+    }
+}
+
 
 
 class ColorCubeModel: BaseFilterModel, ObservableObject {
@@ -56,10 +71,19 @@ class ColorCubeModel: BaseFilterModel, ObservableObject {
                     print("Failed to get the selected item.")
                     return
                 }
+
                 switch result {
                 case .success(let editorImage?):
-                    self.imageState = .success(editorImage)
-                    self.imageStorage = editorImage.data
+                    // Check if Image can make LUT data
+                    if let _ = self.colorCubeFilterFromLUT(lutImage: editorImage.nsImage) {
+                        self.imageState = .success(editorImage)
+                        self.selectedImage = .custom
+                        self.imageStorage = editorImage.data
+                    } else {
+                        self.imageState = .failure(LutError.invalidLutImage)
+                        self.imageStorage = nil
+                        self.selectedImage = .lut1
+                    }
                 case .success(nil):
                     self.imageState = .empty
                 case .failure(let error):
@@ -69,12 +93,31 @@ class ColorCubeModel: BaseFilterModel, ObservableObject {
         }
     }
 
-
+    private func getLutImage() -> NSImage? {
+        switch selectedImage {
+        case .custom:
+            return self.imageState.image?.nsImage
+        default:
+            return NSImage(named: selectedImage.rawValue)
+        }
+    }
 
     override func applyFilter(_ inputImage: CIImage) -> CIImage? {
         let currentFilter = CIFilter.colorCube()
-        guard let data = self.colorCubeFilterFromLUT(imageName: selectedImage.rawValue) else {
-            fatalError("need that data \(selectedImage.rawValue)")
+
+        let image = getLutImage()
+        guard let data = self.colorCubeFilterFromLUT(lutImage: image) else {
+            // handle failure
+            print("failed to get lut data from: \(selectedImage.rawValue)")
+            withAnimation(.easeIn(duration: 0.15)) {
+                if selectedImage == .custom {
+                    imageStorage = nil
+                    imageSelection = nil
+                    imageState = .failure(LutError.invalidLutImage)
+                }
+                self.selectedImage = .lut1
+            }
+            return nil
         }
         currentFilter.cubeData = data
         currentFilter.cubeDimension = Float(64)
@@ -84,11 +127,10 @@ class ColorCubeModel: BaseFilterModel, ObservableObject {
     }
 
     // based on: https://stackoverflow.com/questions/55029167/apply-lut-lookup-table-on-image-swift-xcode
-    fileprivate func colorCubeFilterFromLUT(imageName : String) -> Data? {
+    fileprivate func colorCubeFilterFromLUT(lutImage: NSImage?) -> Data? {
 
         let size = 64
 
-        let lutImage    = NSImage(named: imageName)
         guard let image = lutImage else { return nil }
 
         var imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
@@ -100,11 +142,11 @@ class ColorCubeModel: BaseFilterModel, ObservableObject {
         let columnCount = lutWidth / size
 
         if ((lutWidth % size != 0) || (lutHeight % size != 0) || (rowCount * columnCount != size)) {
-            NSLog("Invalid colorLUT %@", imageName);
+            NSLog("Invalid colorLUT");
             return nil
         }
 
-        let bitmap  = self.getBytesFromImage(image: NSImage(named: imageName))!
+        let bitmap  = self.getBytesFromImage(image: lutImage)!
         let floatSize = MemoryLayout<Float>.size
 
         let cubeData = UnsafeMutablePointer<Float>.allocate(capacity: size * size * size * 4 * floatSize)

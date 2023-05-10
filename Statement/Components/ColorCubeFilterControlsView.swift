@@ -18,7 +18,7 @@ struct ColorCubeFilterControlsView: View {
     var body: some View {
         Section {
             HStack {
-                ForEach(LutImage.allCases, id: \.self) { lut in
+                ForEach([LutImage.lut1, LutImage.lut2, LutImage.lut3], id: \.self) { lut in
                     LutImagePickerView(lut: lut, isSelected: filterModel.selectedImage == lut)
                         .onTapGesture {
                             withAnimation(.easeIn(duration: 0.15)) {
@@ -29,27 +29,53 @@ struct ColorCubeFilterControlsView: View {
                         }
                 }
 
-                GroupBox {
+                ZStack {
                     switch filterModel.imageState {
                     case .empty:
-                        Color.windowBackgroundColor
-
-                    default:
-                        ImageView(imageState: filterModel.imageState)
-                    }
-
-                }
-                .overlay(content: {
-                    ZStack {
-                        Color.windowBackgroundColor.opacity(0.4)
-                        Image(systemName: "folder.fill.badge.plus")
+                        GroupBox {
+                            ZStack {
+                                Color.windowBackgroundColor
+                                Image(systemName: "photo")
+                            }
                             .onTapGesture {
                                 isPresented.toggle()
                             }
+                        }
+
+                    default:
+                        ImageView(imageState: filterModel.imageState)
+                            .lutImageStyle(filterModel.selectedImage == .custom)
+                            .font(.system(size: 8))
+                            .onTapGesture {
+                                withAnimation(.easeIn(duration: 0.15)) {
+                                    filterModel.selectedImage = .custom
+                                }
+                            }
+                    }
+                }
+                .onChange(of: filterModel.selectedImage, perform: { newValue in
+                    if newValue == .custom {
+                        withAnimation(.easeIn(duration: 0.15)) {
+                            model.enabledFilter = filterModel.type
+                            let result = filterModel.processImage(image)
+                            if case .success = result {
+                                model.filteredImageState = result
+                            }
+                        }
                     }
                 })
-                .frame(width: 63, height: 63)
                 .photosPicker(isPresented: $isPresented, selection: $filterModel.imageSelection, matching: .images)
+                .overlay(alignment: .bottom) {
+                    Button {
+                        isPresented.toggle()
+                    } label: {
+                        Label("Edit", systemImage: "pencil")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .labelStyle(.iconOnly)
+                    .help("Choose custom LUT Image")
+                    .offset(y: 5)
+                }
             }
         } header: {
             Text("ColorCube Filter")

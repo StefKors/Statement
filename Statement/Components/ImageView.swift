@@ -19,10 +19,12 @@ struct ImageView: View {
             ProgressView()
         case .empty:
             EmptyView()
-        case .failure:
-            Image(systemName: "exclamationmark.triangle.fill")
-                .font(.system(size: 40))
-                .foregroundColor(.white)
+        case .failure(let error):
+            VStack {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .foregroundColor(.white)
+                Text(error.localizedDescription)
+            }
         }
     }
 }
