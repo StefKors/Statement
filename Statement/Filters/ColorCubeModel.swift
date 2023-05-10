@@ -8,6 +8,8 @@
 import SwiftUI
 import CoreImage
 import CoreImage.CIFilterBuiltins
+import PhotosUI
+import CoreTransferable
 
 enum LutImage: String, CaseIterable {
     case lut1 = "lut-1"
@@ -15,10 +17,59 @@ enum LutImage: String, CaseIterable {
     case lut3 = "lut-3"
 }
 
+
 class ColorCubeModel: BaseFilterModel, ObservableObject {
     @Published var selectedImage: LutImage = .lut1
 
     let type: FilterType = .colorCube
+
+    override init() {
+        super.init()
+        if let data = imageStorage {
+            guard let nsImage = NSImage(data: data) else {
+                return
+            }
+            let image = Image(nsImage: nsImage)
+            let exif = Exif(data: data)
+            self.imageState = .success(EditorImage(image: image, data: data, exif: exif))
+        }
+    }
+
+    // Persist Image
+    @AppStorage("LUT-imageDataStorage") var imageStorage: Data?
+    @Published private(set) var imageState: ImageState = .empty
+    @Published var imageSelection: PhotosPickerItem? = nil {
+        didSet {
+            if let imageSelection {
+                let progress = loadTransferable(from: imageSelection)
+                imageState = .loading(progress)
+            } else {
+                imageState = .empty
+            }
+        }
+    }
+
+    private func loadTransferable(from imageSelection: PhotosPickerItem) -> Progress {
+        return imageSelection.loadTransferable(type: EditorImage.self) { result in
+            DispatchQueue.main.async {
+                guard imageSelection == self.imageSelection else {
+                    print("Failed to get the selected item.")
+                    return
+                }
+                switch result {
+                case .success(let editorImage?):
+                    self.imageState = .success(editorImage)
+                    self.imageStorage = editorImage.data
+                case .success(nil):
+                    self.imageState = .empty
+                case .failure(let error):
+                    self.imageState = .failure(error)
+                }
+            }
+        }
+    }
+
+
 
     override func applyFilter(_ inputImage: CIImage) -> CIImage? {
         let currentFilter = CIFilter.colorCube()

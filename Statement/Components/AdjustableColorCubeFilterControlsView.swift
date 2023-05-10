@@ -11,7 +11,7 @@ struct AdjustableColorCubeFilterControlsView: View {
     @EnvironmentObject private var model: Model
     @EnvironmentObject private var filterModel: AdjustableColorCubeModel
 
-    var image: EditorImage? = nil
+    var image: EditorImage
 
     private let step: Float.Stride = 0.1
 
@@ -29,7 +29,6 @@ struct AdjustableColorCubeFilterControlsView: View {
                 Text("1")
             }
             .onChange(of: filterModel.brightnessAdjustment) { _ in
-                guard let image else { return }
                 model.enabledFilter = filterModel.type
                 model.filteredImageState = filterModel.processImage(image)
             }
@@ -46,7 +45,6 @@ struct AdjustableColorCubeFilterControlsView: View {
                 Text("1")
             }
             .onChange(of: filterModel.saturationAdjustment) { _ in
-                guard let image else { return }
                 model.enabledFilter = filterModel.type
                 model.filteredImageState = filterModel.processImage(image)
             }
@@ -63,19 +61,17 @@ struct AdjustableColorCubeFilterControlsView: View {
                 Text("1")
             }
             .onChange(of: filterModel.destCenterHueAngle) { _ in
-                guard let image else { return }
                 model.enabledFilter = filterModel.type
                 model.filteredImageState = filterModel.processImage(image)
             }
         } header: {
             Text("Adjustable ColorCube Filter")
         }
-        .disabled(image == nil)
     }
 }
 
 struct AdjustableColorCubeFilterControlsView_Previews: PreviewProvider {
     static var previews: some View {
-        AdjustableColorCubeFilterControlsView(image: nil)
+        AdjustableColorCubeFilterControlsView(image: .preview)
     }
 }

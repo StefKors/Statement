@@ -41,10 +41,6 @@ struct ImageEditorView: View {
             }
 
             ToolbarItem(placement: .primaryAction) {
-                SaveImageToolbarButtonView()
-            }
-
-            ToolbarItem(placement: .primaryAction) {
                 OpenPhotosToolbarButtonView()
             }
 

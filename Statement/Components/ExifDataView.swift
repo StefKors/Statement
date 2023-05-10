@@ -11,65 +11,67 @@ import MapKit
 struct ExifDataView: View {
     let exif: Exif
     var body: some View {
-        VStack(alignment: .leading) {
-            if let device = exif.device, let maker = exif.lensMake {
-                Text([maker, device].joined(separator: " "))
-                    .foregroundStyle(.primary)
-                Divider()
-            }
-
-            if let deviceDescription = exif.deviceDescription {
-                Text(deviceDescription.trimmingCharacters(in: .whitespaces).capitalizedSentence)
-            }
-
-            HStack {
-                if let width = exif.width, let height = exif.height {
-                    ImageSpecView(label: "\(width) \u{00d7} \(height)", systemImage: "crop")
+        Section("Exif Data") {
+            VStack(alignment: .leading) {
+                if let device = exif.device, let maker = exif.lensMake {
+                    Text([maker, device].joined(separator: " "))
+                        .foregroundStyle(.primary)
+                    Divider()
                 }
-            }
-
-            if exif.focalLenIn35mmFilm != nil {
-                LazyHGrid(rows: [GridItem(.flexible())], alignment: .center) {
-                    if let iso = exif.ISOSpeedRatings?.first {
-                        Spacer()
-                        Text("ISO \(iso)")
-                        Spacer()
-                        Divider()
-                    }
-
-                    if let focalLength = exif.focalLenIn35mmFilm {
-                        Spacer()
-                        Text("\(focalLength) mm")
-                        Spacer()
-                        Divider()
-                    }
-                    if let exposureBias = exif.exposureBias {
-                        Spacer()
-                        Text("\(exposureBias) ev")
-                        Spacer()
-                        Divider()
-                    }
-                    if let aperture = exif.aperture?.decimals(2) {
-                        Spacer()
-                        Text("\u{0192}\(aperture)")
-                        Spacer()
-                        Divider()
-                    }
-                    if let rationale = exif.exposureTime?.toExposureRational() {
-                        Spacer()
-                        Text("\(rationale) s")
-                        Spacer()
+                
+                if let deviceDescription = exif.deviceDescription {
+                    Text(deviceDescription.trimmingCharacters(in: .whitespaces).capitalizedSentence)
+                }
+                
+                HStack {
+                    if let width = exif.width, let height = exif.height {
+                        ImageSpecView(label: "\(width) \u{00d7} \(height)", systemImage: "crop")
                     }
                 }
-                .padding(.bottom, 4)
-                .frame(maxHeight: 12)
+                
+                if exif.focalLenIn35mmFilm != nil {
+                    LazyHGrid(rows: [GridItem(.flexible())], alignment: .center) {
+                        if let iso = exif.ISOSpeedRatings?.first {
+                            Spacer()
+                            Text("ISO \(iso)")
+                            Spacer()
+                            Divider()
+                        }
+                        
+                        if let focalLength = exif.focalLenIn35mmFilm {
+                            Spacer()
+                            Text("\(focalLength) mm")
+                            Spacer()
+                            Divider()
+                        }
+                        if let exposureBias = exif.exposureBias {
+                            Spacer()
+                            Text("\(exposureBias) ev")
+                            Spacer()
+                            Divider()
+                        }
+                        if let aperture = exif.aperture?.decimals(2) {
+                            Spacer()
+                            Text("\u{0192}\(aperture)")
+                            Spacer()
+                            Divider()
+                        }
+                        if let rationale = exif.exposureTime?.toExposureRational() {
+                            Spacer()
+                            Text("\(rationale) s")
+                            Spacer()
+                        }
+                    }
+                    .padding(.bottom, 4)
+                    .frame(maxHeight: 12)
+                }
+                
+                if let location = exif.location {
+                    MapPinView(location: location)
+                }
             }
-
-            if let location = exif.location {
-                MapPinView(location: location)
-            }
+            .foregroundStyle(.secondary)
         }
-        .foregroundStyle(.secondary)
     }
 }
 

@@ -17,6 +17,18 @@ struct EditorImage: Transferable, Identifiable {
     let exif: Exif
     let id: UUID = UUID()
 
+    var nsImage: NSImage? {
+        NSImage(data: data)
+    }
+
+    var document: ImageDocument {
+        ImageDocument(image: self.nsImage)
+    }
+
+    func makeDocument(_ exportCompression: NSBitmapImageRep.TIFFCompression) -> ImageDocument {
+        ImageDocument(image: self.nsImage, compression: exportCompression)
+    }
+
     static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(importedContentType: .image) { data in
             guard let nsImage = NSImage(data: data) else {
@@ -27,4 +39,8 @@ struct EditorImage: Transferable, Identifiable {
             return EditorImage(image: image, data: data, exif: exif)
         }
     }
+}
+
+extension EditorImage {
+    static let preview: EditorImage = .init(image: Image(systemName: "dot"), data: Data(), exif: Exif())
 }

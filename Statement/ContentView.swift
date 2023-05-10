@@ -34,20 +34,18 @@ struct ContentView: View {
             .dottedBackgroundPattern()
             .animation(.interpolatingSpring(stiffness: 300, damping: 20), value: model.viewPreference)
 
-            VStack {
-                Form {
-                    SepiaFilterControlsView(image: model.imageState.image)
-                    ColorCubeFilterControlsView(image: model.imageState.image)
-                    AdjustableColorCubeFilterControlsView(image: model.imageState.image)
-
-                    if let exif =  model.imageState.image?.exif {
-                        Section("Exif Data") {
-                            ExifDataView(exif: exif)
-                        }
+            if case let .success(image) = model.imageState {
+                VStack {
+                    Form {
+                        SepiaFilterControlsView(image: image)
+                        ColorCubeFilterControlsView(image: image)
+                        AdjustableColorCubeFilterControlsView(image: image)
+                        ExifDataView(exif: image.exif)
+                        ExportControlsView()
                     }
+                    .formStyle(.grouped)
+                    .frame(width: 280)
                 }
-                .formStyle(.grouped)
-                .frame(width: 280)
             }
         }
         .scenePadding()
