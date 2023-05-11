@@ -15,8 +15,11 @@ struct ImageView: View {
         case .success(let image):
             image.image.resizable()
                 .id(image.id)
-        case .loading:
-            ProgressView()
+        case .loading(let progress):
+            ProgressView(progress)
+                .progressViewStyle(.linear)
+                .frame(maxWidth: 150)
+                .padding(4)
         case .empty:
             EmptyView()
         case .failure(let error):
@@ -41,7 +44,7 @@ struct ImageView_Previews: PreviewProvider {
                 .clipShape(RoundedRectangle(cornerRadius: 6))
                 .frame(width: 100, height: 100)
 
-            ImageView(imageState: .loading(Progress(totalUnitCount: 100)))
+            ImageView(imageState: .loading(Progress(totalUnitCount: 20)))
                 .scaledToFill()
                 .clipShape(RoundedRectangle(cornerRadius: 6))
                 .frame(width: 100, height: 100)
@@ -56,6 +59,8 @@ struct ImageView_Previews: PreviewProvider {
                 .clipShape(RoundedRectangle(cornerRadius: 6))
                 .frame(width: 100, height: 100)
 
-        }.scenePadding()
+        }
+        .frame(width: 300)
+        .scenePadding()
     }
 }

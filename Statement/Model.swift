@@ -42,11 +42,16 @@ class Model: ObservableObject {
     @Published private(set) var imageState: ImageState = .empty
     @Published var imageSelection: PhotosPickerItem? = nil {
         didSet {
-            if let imageSelection {
-                let progress = loadTransferable(from: imageSelection)
-                imageState = .loading(progress)
-            } else {
-                imageState = .empty
+            withAnimation(.easeIn(duration: 0.15)) {
+                // Reset Filter
+                self.enabledFilter = .none
+                self.filteredImageState = .empty
+                if let imageSelection {
+                    let progress = loadTransferable(from: imageSelection)
+                    imageState = .loading(progress)
+                } else {
+                    imageState = .empty
+                }
             }
         }
     }
@@ -61,14 +66,16 @@ class Model: ObservableObject {
                     print("Failed to get the selected item.")
                     return
                 }
-                switch result {
-                case .success(let editorImage?):
-                    self.imageState = .success(editorImage)
-                    self.imageStorage = editorImage.data
-                case .success(nil):
-                    self.imageState = .empty
-                case .failure(let error):
-                    self.imageState = .failure(error)
+                withAnimation(.easeIn(duration: 0.15)) {
+                    switch result {
+                    case .success(let editorImage?):
+                        self.imageState = .success(editorImage)
+                        self.imageStorage = editorImage.data
+                    case .success(nil):
+                        self.imageState = .empty
+                    case .failure(let error):
+                        self.imageState = .failure(error)
+                    }
                 }
             }
         }
