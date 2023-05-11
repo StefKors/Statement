@@ -9,6 +9,14 @@ import SwiftUI
 
 struct SideBySideView: View {
     @EnvironmentObject private var model: Model
+
+    var editedImageWithFallback: ImageState {
+        if model.filteredImageState.image != nil {
+            return model.filteredImageState
+        } else {
+            return model.imageState
+        }
+    }
     
     var body: some View {
         HStack(alignment: .top) {
@@ -19,13 +27,11 @@ struct SideBySideView: View {
                     .cornerRadius(8)
             }
 
-            if model.filteredImageState.image != nil {
-                VStack(alignment: .leading) {
-                    Text("Edited")
-                    ImageView(imageState: model.filteredImageState)
-                        .scaledToFit()
-                        .cornerRadius(8)
-                }
+            VStack(alignment: .leading) {
+                Text("Edited ") + Text(model.enabledFilter.rawValue).foregroundColor(.secondary)
+                ImageView(imageState: editedImageWithFallback)
+                    .scaledToFit()
+                    .cornerRadius(8)
             }
         }
     }

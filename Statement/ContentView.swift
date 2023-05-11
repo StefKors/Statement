@@ -27,11 +27,11 @@ struct ContentView: View {
                         .navigationSubtitle("Edit Photo")
                 }
             }
+            .dottedBackgroundPattern()
             .safeAreaInset(edge: .bottom, content: {
                 ViewTypeSwitcherView()
             })
             .padding()
-            .dottedBackgroundPattern()
             .animation(.interpolatingSpring(stiffness: 300, damping: 20), value: model.viewPreference)
 
             if case let .success(image) = model.imageState {
@@ -44,8 +44,9 @@ struct ContentView: View {
                         ExportControlsView()
                     }
                     .formStyle(.grouped)
-                    .frame(width: 280)
                 }
+                .frame(width: 300)
+                .transition(.move(edge: .trailing).combined(with: .opacity))
             }
         }
         .scenePadding()

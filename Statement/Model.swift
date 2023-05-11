@@ -12,10 +12,10 @@ import PhotosUI
 import CoreTransferable
 
 enum FilterType: String, CaseIterable {
-    case colorCube
-    case adjustableColorCube
-    case sepia
-    case none
+    case colorCube = "ColorCube"
+    case adjustableColorCube = "Adjustable ColorCube"
+    case sepia = "Sepia"
+    case none = "None"
 }
 
 enum ViewType: String, CaseIterable, Identifiable {
