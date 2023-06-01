@@ -3,7 +3,7 @@
   <h1 align="center">Statement</h1>
 </p>
 
-[Statement](https://github.com/StefKors/Statement) is an tiny image editing tool. Use it to apply LUT filters to images.
+[Statement](https://github.com/StefKors/Statement) is an tiny image editing tool. Use it to apply LUT filters to images. Originally built for a technical hiring assignment.
 
 #### Supported Platforms
 <p align="left">
