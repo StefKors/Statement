@@ -5,6 +5,10 @@
 //  Created by Stef Kors on 08/05/2023.
 //
 
+
+// make use of:
+// https://github.com/danwood/SwiftUICoreImage
+
 import SwiftUI
 
 @main
