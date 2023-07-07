@@ -39,7 +39,7 @@ enum PreviewError: Error {
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ImageView(imageState: .success(EditorImage(image: Image(systemName: "photo"), data: Data(), exif: Exif(data: Data()))))
+            ImageView(imageState: .success(EditorImage(image: Image(systemName: "photo"), ciImage: CIImage(color: .blue), data: Data(), exif: Exif(data: Data()))))
                 .scaledToFill()
                 .clipShape(RoundedRectangle(cornerRadius: 6))
                 .frame(width: 100, height: 100)

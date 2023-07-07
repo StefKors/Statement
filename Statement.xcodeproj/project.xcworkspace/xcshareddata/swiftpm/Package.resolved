@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swiftuicoreimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/danwood/SwiftUICoreImage.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "514b49c8d2ba645109639dfae82f10545a9a6472"
+      }
+    }
+  ],
+  "version" : 2
+}

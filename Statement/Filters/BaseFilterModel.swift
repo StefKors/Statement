@@ -31,7 +31,7 @@ class BaseFilterModel: Identifiable {
         // Get Exif from Data
         let exif = Exif(data: data)
         // Create EditorImage
-        let editorImage = EditorImage(image: image, data: data, exif: exif)
+        let editorImage = EditorImage(image: image, ciImage: inputImage, data: data, exif: exif)
         // Update Image State
         return .success(editorImage)
     }

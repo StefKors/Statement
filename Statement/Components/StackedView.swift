@@ -7,9 +7,48 @@
 
 import SwiftUI
 
-struct StackedView: View {
+
+
+
+// extension View {
+//     func inspectorContent(inspectorContent: () -> some View) -> some View {
+//         modifier(InspectorModifierView(inspectorContent: inspectorContent))
+//     }
+// }
+// 
+// struct InspectorModifierView: ViewModifier {
+//     func body(content: Content) -> some View {
+//         content
+//             .padding()
+//             .background(.quaternary, in: Capsule())
+//     }
+// }
+// 
+// 
+// struct CardView<Content: View>: View {
+//     @EnvironmentObject private var inspectorState: InspectorModel
+//     @ViewBuilder let content: Content
+// 
+//     init(@ViewBuilder content: () -> Content) {
+//         self.content = content()
+//         self.inspectorState.count += 1
+//     }
+// 
+//     var body: some View {
+//         
+//     }
+// }
+
+
+struct StackedView<Content: View>: View {
     @EnvironmentObject private var model: Model
-    
+
+    let content: () -> Content
+
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
+    }
+
     var body: some View {
         HStack(alignment: .top) {
             ResizableView(
@@ -18,12 +57,7 @@ struct StackedView: View {
                         .scaledToFit()
                 },
                 clippedContent: {
-                    ZStack {
-                        if model.filteredImageState.image != nil {
-                            ImageView(imageState: model.filteredImageState)
-                                .scaledToFit()
-                        }
-                    }
+                    content()
                 })
         }
     }
@@ -31,6 +65,8 @@ struct StackedView: View {
 
 struct StackedView_Previews: PreviewProvider {
     static var previews: some View {
-        StackedView()
+        StackedView {
+            Image(systemName: "dot.fill")
+        }
     }
 }

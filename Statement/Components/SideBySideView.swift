@@ -6,31 +6,30 @@
 //
 
 import SwiftUI
+import AppKit
 
-struct SideBySideView: View {
+struct SideBySideView<Content: View>: View {
     @EnvironmentObject private var model: Model
 
-    var editedImageWithFallback: ImageState {
-        if model.filteredImageState.image != nil {
-            return model.filteredImageState
-        } else {
-            return model.imageState
-        }
+    let content: () -> Content
+
+    init(@ViewBuilder content: @escaping () -> Content) {
+        self.content = content
     }
-    
+
     var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
                 Text("Original")
                 ImageView(imageState: model.imageState)
-                    .scaledToFit()
+                    // .scaledToFit()
                     .cornerRadius(8)
             }
 
             VStack(alignment: .leading) {
-                Text("Edited ") + Text(model.enabledFilter.rawValue).foregroundColor(.secondary)
-                ImageView(imageState: editedImageWithFallback)
-                    .scaledToFit()
+                Text("Edited")
+                    content()
+                    // .scaledToFit()
                     .cornerRadius(8)
             }
         }
@@ -39,6 +38,8 @@ struct SideBySideView: View {
 
 struct SideBySideView_Previews: PreviewProvider {
     static var previews: some View {
-        SideBySideView()
+        SideBySideView {
+            Image(systemName: "dot.fill")
+        }
     }
 }

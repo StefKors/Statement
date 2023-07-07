@@ -43,9 +43,9 @@ struct ExportControlsView: View {
             }
             .fileExporter(
                 isPresented: $isSaving,
-                document: model.filteredImageState.image?.makeDocument(exportCompression),
+                document: model.imageState.image?.makeDocument(exportCompression),
                 contentType: exportType,
-                defaultFilename: "\(model.enabledFilter.rawValue)-filter"
+                defaultFilename: "edited-image"
             ) { result in
                 print(result)
             }

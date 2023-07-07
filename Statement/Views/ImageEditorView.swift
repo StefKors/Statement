@@ -7,35 +7,38 @@
 
 import SwiftUI
 
+struct ImageLayoutView: View {
+    let ciImage: CIImage
+    let viewPreference: ViewType
+
+    var body: some View {
+        switch viewPreference {
+        case .sideBySide:
+            SideBySideView {
+                EditedImageView(ciImage: ciImage)
+            }
+        case .stacked:
+            StackedView {
+                EditedImageView(ciImage: ciImage)
+            }
+        }
+    }
+}
+
+
 struct ImageEditorView: View {
     @EnvironmentObject private var model: Model
-    @EnvironmentObject private var colorCubeFilter: ColorCubeModel
-    @EnvironmentObject private var adjustableColorCubeFilter: AdjustableColorCubeModel
     @EnvironmentObject private var sepiaFilter: SepiaModel
 
     var body: some View {
         VStack(alignment: .leading) {
-            switch model.viewPreference {
-            case .sideBySide:
-                SideBySideView()
-            case .stacked:
-                StackedView()
+            if let ciImage = model.imageState.image?.ciImage {
+                ImageLayoutView(ciImage: ciImage, viewPreference: model.viewPreference)
+                    .frame(minWidth: 300, maxWidth: 1400, minHeight: 300, maxHeight: 1400, alignment: .center)
+                    .id(model.imageState.image?.id)
             }
         }
-        .task {
-            guard let image = model.imageState.image else { return }
-            switch model.enabledFilter {
-            case .adjustableColorCube:
-                self.model.filteredImageState = adjustableColorCubeFilter.processImage(image)
-            case .colorCube:
-                self.model.filteredImageState = colorCubeFilter.processImage(image)
-            case .sepia:
-                self.model.filteredImageState = sepiaFilter.processImage(image)
-            case .none:
-                print("do nothing")
-            }
-        }
-        .toolbar(content: {
+        .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 CancelFilterButtonView()
             }
@@ -54,7 +57,7 @@ struct ImageEditorView: View {
                 }
                 .foregroundStyle(.red)
             }
-        })
+        }
 
         .scenePadding()
 

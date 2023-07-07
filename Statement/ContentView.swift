@@ -34,20 +34,15 @@ struct ContentView: View {
             .padding()
             .animation(.interpolatingSpring(stiffness: 300, damping: 20), value: model.viewPreference)
 
-            if case let .success(image) = model.imageState {
+            // if case let .success(image) = model.imageState {
+                Divider()
+
                 VStack {
-                    Form {
-                        SepiaFilterControlsView(image: image)
-                        ColorCubeFilterControlsView(image: image)
-                        AdjustableColorCubeFilterControlsView(image: image)
-                        ExifDataView(exif: image.exif)
-                        ExportControlsView()
-                    }
-                    .formStyle(.grouped)
+                    InspectorRenderer()
                 }
                 .frame(width: 300)
                 .transition(.move(edge: .trailing).combined(with: .opacity))
-            }
+            // }
         }
         .scenePadding()
         

@@ -28,10 +28,6 @@ struct SepiaFilterControlsView: View {
             } maximumValueLabel: {
                 Text("1")
             }
-            .onChange(of: filterModel.intensityAdjustment) { _ in
-                model.enabledFilter = filterModel.type
-                model.filteredImageState = filterModel.processImage(image)
-            }
         } header: {
             Text("Sepia Filter")
         }

@@ -14,17 +14,15 @@ import SwiftUI
 @main
 struct StatementApp: App {
     @StateObject var model = Model()
-    @StateObject var colorCubeFilter = ColorCubeModel()
-    @StateObject var adjustableColorCubeFilter = AdjustableColorCubeModel()
     @StateObject var sepiaFilter = SepiaModel()
+    @StateObject var inspector = InspectorModel()
 
     var body: some Scene {
         WindowGroup("Statement") {
             ContentView()
                 .environmentObject(model)
                 .environmentObject(sepiaFilter)
-                .environmentObject(colorCubeFilter)
-                .environmentObject(adjustableColorCubeFilter)
+                .environmentObject(inspector)
                 .buttonStyle(.regularButtonStyle)
                 .navigationTitle("Statement")
         }

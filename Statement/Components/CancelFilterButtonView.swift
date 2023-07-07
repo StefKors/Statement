@@ -12,7 +12,7 @@ struct CancelFilterButtonView: View {
 
     var body: some View {
         Button("Remove Filter") {
-            model.enabledFilter = .none
+            print("todo")
         }
     }
 }

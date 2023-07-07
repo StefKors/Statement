@@ -28,12 +28,13 @@ enum ViewType: String, CaseIterable, Identifiable {
 class Model: ObservableObject {
     internal init() {
         if let data = imageStorage {
-            guard let nsImage = NSImage(data: data) else {
+            guard let nsImage = NSImage(data: data), let ciImage = CIImage(data: data, options: [.applyOrientationProperty:true]) else {
                 return
             }
             let image = Image(nsImage: nsImage)
             let exif = Exif(data: data)
-            self.imageState = .success(EditorImage(image: image, data: data, exif: exif))
+
+            self.imageState = .success(EditorImage(image: image, ciImage: ciImage, data: data, exif: exif))
         }
     }
 
@@ -44,8 +45,6 @@ class Model: ObservableObject {
         didSet {
             withAnimation(.easeIn(duration: 0.15)) {
                 // Reset Filter
-                self.enabledFilter = .none
-                self.filteredImageState = .empty
                 if let imageSelection {
                     let progress = loadTransferable(from: imageSelection)
                     imageState = .loading(progress)
@@ -55,8 +54,6 @@ class Model: ObservableObject {
             }
         }
     }
-    @Published var enabledFilter: FilterType = .colorCube
-    @Published var filteredImageState: ImageState = .empty
     @Published var viewPreference: ViewType = .stacked
 
     private func loadTransferable(from imageSelection: PhotosPickerItem) -> Progress {
