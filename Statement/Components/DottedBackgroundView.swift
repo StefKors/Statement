@@ -31,7 +31,7 @@ struct DottedBackgroundView: View {
                 .foregroundStyle(.quaternary.opacity(0.8), .clear)
                 .imageScale(.small)
         }
-        .background(.background.secondary)
+        .background(.background)
     }
 }
 
