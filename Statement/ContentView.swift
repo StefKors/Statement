@@ -7,7 +7,6 @@
 
 import SwiftUI
 import PhotosUI
-import HistogramView
 
 struct ContentView: View {
     @EnvironmentObject private var model: Model
@@ -42,9 +41,8 @@ struct ContentView: View {
                         InspectorRenderer()
                             .environment(\.currentImage, image.ciImage)
                         ExifDataView(exif: image.exif)
-                        Section("Histogram (Source Image)") {
-                            HistogramView(image: image.nsImage, blendMode: .multiply)
-                                .frame(height: 100)
+                        Section("Histogram") {
+                            HistogramStackView(image: image)
                         }
                         ExportControlsView()
                             .environment(\.currentImage, image.ciImage)

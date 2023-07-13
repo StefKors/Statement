@@ -1,15 +1,6 @@
 {
   "pins" : [
     {
-      "identity" : "histogramview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/alladinian/HistogramView.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "608563905f42e524fdf07b8bb2854e48431c0869"
-      }
-    },
-    {
       "identity" : "swiftuicoreimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/danwood/SwiftUICoreImage.git",
