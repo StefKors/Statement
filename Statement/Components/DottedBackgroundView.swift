@@ -25,18 +25,19 @@ struct DottedBackgroundView: View {
 
     var body: some View {
         VStack {
-            Image(systemName: "dot.square")
+            Image("dot")
                 .resizable(resizingMode: .tile)
                 .symbolRenderingMode(.palette)
                 .foregroundStyle(.quaternary.opacity(0.8), .clear)
                 .imageScale(.small)
         }
-        .background(Color.windowBackgroundColor)
+        .background(.background.secondary)
     }
 }
 
 struct DottedBackgroundView_Previews: PreviewProvider {
     static var previews: some View {
         DottedBackgroundView()
+            .frame(width: 300, height: 300, alignment: .center)
     }
 }

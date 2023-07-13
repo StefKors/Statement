@@ -31,10 +31,6 @@ struct ImageEditorView: View {
         }
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
-                CancelFilterButtonView()
-            }
-
-            ToolbarItem(placement: .primaryAction) {
                 OpenPhotosToolbarButtonView(selection: $model.imageSelection)
             }
 

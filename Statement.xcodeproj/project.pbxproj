@@ -46,7 +46,6 @@
 		8A8857332A0A8C6F00397B3C /* MapLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857322A0A8C6F00397B3C /* MapLocation.swift */; };
 		8A8857352A0A8C9600397B3C /* Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857342A0A8C9600397B3C /* Exif.swift */; };
 		8A88573C2A0AA50300397B3C /* ExportControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88573B2A0AA50300397B3C /* ExportControlsView.swift */; };
-		8A88573E2A0ABA4300397B3C /* CancelFilterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88573D2A0ABA4300397B3C /* CancelFilterButtonView.swift */; };
 		8A8857402A0ABB3600397B3C /* StackedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88573F2A0ABB3600397B3C /* StackedView.swift */; };
 		8A8857422A0ABB4400397B3C /* SideBySideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857412A0ABB4400397B3C /* SideBySideView.swift */; };
 		8A8857442A0ABE7F00397B3C /* ViewTypeSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8857432A0ABE7F00397B3C /* ViewTypeSwitcherView.swift */; };
@@ -101,7 +100,6 @@
 		8A8857322A0A8C6F00397B3C /* MapLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocation.swift; sourceTree = "<group>"; };
 		8A8857342A0A8C9600397B3C /* Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exif.swift; sourceTree = "<group>"; };
 		8A88573B2A0AA50300397B3C /* ExportControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportControlsView.swift; sourceTree = "<group>"; };
-		8A88573D2A0ABA4300397B3C /* CancelFilterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelFilterButtonView.swift; sourceTree = "<group>"; };
 		8A88573F2A0ABB3600397B3C /* StackedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackedView.swift; sourceTree = "<group>"; };
 		8A8857412A0ABB4400397B3C /* SideBySideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBySideView.swift; sourceTree = "<group>"; };
 		8A8857432A0ABE7F00397B3C /* ViewTypeSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTypeSwitcherView.swift; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				8AC0C2152A5EE5A10096772B /* BloomControlsView.swift */,
-				8A88573D2A0ABA4300397B3C /* CancelFilterButtonView.swift */,
 				8A8856FC2A09198700397B3C /* DottedBackgroundView.swift */,
 				8A6AADA72A571F24002DD1F9 /* EditedImageView.swift */,
 				8A88572C2A0A743100397B3C /* ExifDataView.swift */,
@@ -337,7 +334,6 @@
 				8A8857222A0A5DD600397B3C /* EditorImage.swift in Sources */,
 				8A8857312A0A80B300397B3C /* MapPinView.swift in Sources */,
 				8A1382272A0BC1BB00FCC68C /* SuccessEmojiButton.swift in Sources */,
-				8A88573E2A0ABA4300397B3C /* CancelFilterButtonView.swift in Sources */,
 				8AC0C2122A5EE2AA0096772B /* GradientSliderView.swift in Sources */,
 				8A8857402A0ABB3600397B3C /* StackedView.swift in Sources */,
 				8AC0C2142A5EE4400096772B /* VibranceAmountSlider.swift in Sources */,
