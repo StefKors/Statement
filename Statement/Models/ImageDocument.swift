@@ -12,8 +12,8 @@ import UniformTypeIdentifiers
 struct ImageDocument: FileDocument {
     static var readableContentTypes: [UTType] {
         [
-            .jpeg,
             .png,
+            .jpeg,
             .tiff,
             .heic
         ]
@@ -34,6 +34,7 @@ struct ImageDocument: FileDocument {
 
     var image: NSImage
     var compression: NSBitmapImageRep.TIFFCompression = .none
+    // var type: UTType = .png
 
     init(image: NSImage?) {
         self.image = image ?? NSImage()
@@ -52,6 +53,6 @@ struct ImageDocument: FileDocument {
 
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
         /* You can replace tiff representation with what you want to export */
-        return FileWrapper(regularFileWithContents: image.tiffRepresentation(using: .packBits, factor: 1)!)
+        return FileWrapper(regularFileWithContents: image.tiffRepresentation(using: compression, factor: 1)!)
     }
 }

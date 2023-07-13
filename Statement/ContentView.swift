@@ -47,6 +47,7 @@ struct ContentView: View {
                                 .frame(height: 100)
                         }
                         ExportControlsView()
+                            .environment(\.currentImage, image.ciImage)
                     }.formStyle(.grouped)
                 }
                 .frame(width: 300)

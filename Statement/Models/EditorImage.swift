@@ -19,18 +19,6 @@ struct EditorImage: Transferable, Identifiable {
     let exif: Exif
     let id: UUID = UUID()
 
-    var document: ImageDocument {
-        print("document")
-        let nsImage = NSImage(data: data)
-        return ImageDocument(image: nsImage)
-    }
-
-    func makeDocument(_ exportCompression: NSBitmapImageRep.TIFFCompression) -> ImageDocument {
-        print("makeDocument")
-        let nsImage = NSImage(data: data)
-        return ImageDocument(image: nsImage, compression: exportCompression)
-    }
-
     static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(importedContentType: .image) { data in
             guard let nsImage = NSImage(data: data), let ciImage = CIImage(data: data, options: [.applyOrientationProperty:true]) else {

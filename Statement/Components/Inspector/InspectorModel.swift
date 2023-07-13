@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Accelerate
+import SwiftUICoreImage
 
 public enum ColorCubeHelperError: Error {
     case incorrectImageSize
@@ -85,6 +86,27 @@ class InspectorModel: ObservableObject {
 
     init() {
         self.selectedFilter = filters.first!
+    }
+
+    func makeEditedImage(ciImage: CIImage) -> CIImage {
+        ciImage
+            .sepiaTone(intensity: Float(self.sepiaToneIntensity))
+        // .comicEffect(active: self.enableComicEffect)
+            .vibrance(amount: Float(self.vibranceAmount))
+            .colorCubeWithColorSpace(
+                cubeDimension: self.selectedFilter.dimension,
+                cubeData: self.selectedFilter.data,
+                extrapolate: self.selectedFilter.extrapolate,
+                colorSpace: self.selectedFilter.colorSpace
+            )
+        // .recropping { image in
+        //     image
+        //         .clampedToExtent(active: false)
+        //         .bloom(
+        //             radius: Float(self.bloomRadius),
+        //             intensity: Float(self.bloomIntensity)
+        //         )
+        // }
     }
 
     // converted wrong luts with: https://www.color.io/free-online-lut-converter

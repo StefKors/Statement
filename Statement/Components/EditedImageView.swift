@@ -23,40 +23,20 @@ struct ImageSlider: View {
 }
 
 struct EditedImageView: View {
-    var ciImage: CIImage?
+    var ciImage: CIImage
     @EnvironmentObject private var inspector: InspectorModel
 
     var body: some View {
         VStack {
-            if let ciImage {
-                Image(ciImage: ciImage
-                    .sepiaTone(intensity: Float(inspector.sepiaToneIntensity))
-                    // .comicEffect(active: inspector.enableComicEffect)
-                    .vibrance(amount: Float(inspector.vibranceAmount))
-                    .colorCubeWithColorSpace(
-                        cubeDimension: inspector.selectedFilter.dimension,
-                        cubeData: inspector.selectedFilter.data,
-                        extrapolate: inspector.selectedFilter.extrapolate,
-                        colorSpace: inspector.selectedFilter.colorSpace
-                    )
-                        // .recropping { image in
-                        //     image
-                        //         .clampedToExtent(active: false)
-                        //         .bloom(
-                        //             radius: Float(inspector.bloomRadius),
-                        //             intensity: Float(inspector.bloomIntensity)
-                        //         )
-                        // }
-                )
+            Image(ciImage: inspector.makeEditedImage(ciImage: ciImage))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .id("edited-image")
-            }
         }
     }
 }
 struct EditedImageView_Previews: PreviewProvider {
     static var previews: some View {
-        EditedImageView()
+        EditedImageView(ciImage: CIImage(color: .blue))
     }
 }

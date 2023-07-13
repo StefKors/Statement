@@ -9,13 +9,14 @@ import SwiftUI
 import UniformTypeIdentifiers
 
 struct ExportControlsView: View {
-    @EnvironmentObject private var model: Model
+    @EnvironmentObject private var inspector: InspectorModel
+    @Environment(\.currentImage) private var currentImage
 
     @State private var isSaving: Bool = false
 
     @State private var exportType: UTType = ImageDocument.readableContentTypes[0]
 
-    @State private var exportCompression: NSBitmapImageRep.TIFFCompression = .jpeg
+    @State private var exportCompression: NSBitmapImageRep.TIFFCompression = .none
 
     var body: some View {
         Section("Export Options") {
@@ -28,28 +29,41 @@ struct ExportControlsView: View {
                 Text("File Type")
             }
 
-            Picker(selection: $exportCompression) {
-                ForEach(ImageDocument.exportCompressionTypes, id: \.rawValue) { type in
-                    Text(NSBitmapImageRep.localizedName(forTIFFCompressionType: type) ?? "")
-                        .tag(type)
+            if exportType == .jpeg {
+                Picker(selection: $exportCompression) {
+                    ForEach(ImageDocument.exportCompressionTypes, id: \.rawValue) { type in
+                        Text(NSBitmapImageRep.localizedName(forTIFFCompressionType: type) ?? "")
+                            .tag(type)
+                    }
+                } label: {
+                    Text("Compression")
                 }
-            } label: {
-                Text("Compression")
+                .pickerStyle(.menu)
+                
             }
-            .pickerStyle(.menu)
 
             SuccessEmojiButton(label: "Export Photo") {
                 isSaving.toggle()
             }
             .fileExporter(
                 isPresented: $isSaving,
-                document: model.imageState.image?.makeDocument(exportCompression),
+                document: makeDocument(exportCompression),
                 contentType: exportType,
                 defaultFilename: "edited-image"
             ) { result in
                 print(result)
             }
         }
+    }
+
+    func makeDocument(_ exportCompression: NSBitmapImageRep.TIFFCompression) -> ImageDocument {
+        print("makeDocument")
+        let ciImage = inspector.makeEditedImage(ciImage: currentImage)
+        let rep = NSCIImageRep(ciImage: ciImage)
+        let nsImage = NSImage(size: rep.size)
+        nsImage.addRepresentation(rep)
+        let compression = exportType == .jpeg ? exportCompression : .none
+        return ImageDocument(image: nsImage, compression: compression)
     }
 }
 

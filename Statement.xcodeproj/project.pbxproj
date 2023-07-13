@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A0D9EC72A6076A5002FEF48 /* ImageLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A0D9EC62A6076A5002FEF48 /* ImageLayoutView.swift */; };
 		8A1382252A0BABC800FCC68C /* ImageDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1382242A0BABC800FCC68C /* ImageDocument.swift */; };
 		8A1382272A0BC1BB00FCC68C /* SuccessEmojiButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1382262A0BC1BB00FCC68C /* SuccessEmojiButton.swift */; };
 		8A1A86E22A5887050012CD4F /* ClampedValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A86E12A5887050012CD4F /* ClampedValue.swift */; };
@@ -55,6 +56,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8A0D9EC62A6076A5002FEF48 /* ImageLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLayoutView.swift; sourceTree = "<group>"; };
 		8A1382242A0BABC800FCC68C /* ImageDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDocument.swift; sourceTree = "<group>"; };
 		8A1382262A0BC1BB00FCC68C /* SuccessEmojiButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessEmojiButton.swift; sourceTree = "<group>"; };
 		8A1A86E12A5887050012CD4F /* ClampedValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClampedValue.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				8AC0C2132A5EE4400096772B /* VibranceAmountSlider.swift */,
 				8A8857432A0ABE7F00397B3C /* ViewTypeSwitcherView.swift */,
 				8A6AADA22A570C1A002DD1F9 /* Inspector */,
+				8A0D9EC62A6076A5002FEF48 /* ImageLayoutView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				8A1382252A0BABC800FCC68C /* ImageDocument.swift in Sources */,
 				8A1D6C712A58A0BF007F0FBF /* HueRangeSlider.swift in Sources */,
 				8A88570E2A0933B800397B3C /* ResizableView.swift in Sources */,
+				8A0D9EC72A6076A5002FEF48 /* ImageLayoutView.swift in Sources */,
 				8A88572F2A0A7D5800397B3C /* Rational.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
