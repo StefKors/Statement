@@ -14,6 +14,7 @@ enum TransferError: Error {
 struct EditorImage: Transferable, Identifiable {
     let image: Image
     let ciImage: CIImage
+    let nsImage: NSImage
     let data: Data
     let exif: Exif
     let id: UUID = UUID()
@@ -37,11 +38,23 @@ struct EditorImage: Transferable, Identifiable {
             }
             let image = Image(nsImage: nsImage)
             let exif = Exif(data: data)
-            return EditorImage(image: image, ciImage: ciImage, data: data, exif: exif)
+            return EditorImage(
+                image: image,
+                ciImage: ciImage,
+                nsImage: nsImage,
+                data: data,
+                exif: exif
+            )
         }
     }
 }
 
 extension EditorImage {
-    static let preview: EditorImage = .init(image: Image(systemName: "dot"), ciImage: CIImage(color: .blue), data: Data(), exif: Exif())
+    static let preview: EditorImage = .init(
+        image: Image(systemName: "dot"),
+        ciImage: CIImage(color: .blue),
+        nsImage: NSImage(),
+        data: Data(),
+        exif: Exif()
+    )
 }

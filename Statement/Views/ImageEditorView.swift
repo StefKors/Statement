@@ -25,16 +25,25 @@ struct ImageLayoutView: View {
     }
 }
 
+private struct CurrentImage: EnvironmentKey {
+    static let defaultValue = CIImage(color: .blue)
+}
+
+extension EnvironmentValues {
+    var currentImage: CIImage {
+        get { self[CurrentImage.self] }
+        set { self[CurrentImage.self] = newValue }
+    }
+}
 
 struct ImageEditorView: View {
     @EnvironmentObject private var model: Model
-    @EnvironmentObject private var sepiaFilter: SepiaModel
 
     var body: some View {
         VStack(alignment: .leading) {
             if let ciImage = model.imageState.image?.ciImage {
                 ImageLayoutView(ciImage: ciImage, viewPreference: model.viewPreference)
-                    .frame(minWidth: 300, maxWidth: 1400, minHeight: 300, maxHeight: 1400, alignment: .center)
+                    .environment(\.currentImage, ciImage)
                     .id(model.imageState.image?.id)
             }
         }
@@ -44,7 +53,7 @@ struct ImageEditorView: View {
             }
 
             ToolbarItem(placement: .primaryAction) {
-                OpenPhotosToolbarButtonView()
+                OpenPhotosToolbarButtonView(selection: $model.imageSelection)
             }
 
             ToolbarItem(placement: .destructiveAction) {

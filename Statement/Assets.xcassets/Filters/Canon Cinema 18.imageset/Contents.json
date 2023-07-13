@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "Canon Cinema 18.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "compression-type" : "gpu-optimized-smallest",
+    "template-rendering-intent" : "original"
+  }
+}

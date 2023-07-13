@@ -22,14 +22,14 @@ struct SideBySideView<Content: View>: View {
             VStack(alignment: .leading) {
                 Text("Original")
                 ImageView(imageState: model.imageState)
-                    // .scaledToFit()
+                    .scaledToFit()
                     .cornerRadius(8)
             }
 
             VStack(alignment: .leading) {
                 Text("Edited")
                     content()
-                    // .scaledToFit()
+                    .scaledToFit()
                     .cornerRadius(8)
             }
         }

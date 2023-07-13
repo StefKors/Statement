@@ -11,12 +11,6 @@ import AppKit
 import PhotosUI
 import CoreTransferable
 
-enum FilterType: String, CaseIterable {
-    case colorCube = "ColorCube"
-    case adjustableColorCube = "Adjustable ColorCube"
-    case sepia = "Sepia"
-    case none = "None"
-}
 
 enum ViewType: String, CaseIterable, Identifiable {
     case stacked
@@ -34,7 +28,7 @@ class Model: ObservableObject {
             let image = Image(nsImage: nsImage)
             let exif = Exif(data: data)
 
-            self.imageState = .success(EditorImage(image: image, ciImage: ciImage, data: data, exif: exif))
+            self.imageState = .success(EditorImage(image: image, ciImage: ciImage, nsImage: nsImage, data: data, exif: exif))
         }
     }
 
@@ -54,7 +48,7 @@ class Model: ObservableObject {
             }
         }
     }
-    @Published var viewPreference: ViewType = .stacked
+    @AppStorage("viewPreference") var viewPreference: ViewType = .stacked
 
     private func loadTransferable(from imageSelection: PhotosPickerItem) -> Progress {
         return imageSelection.loadTransferable(type: EditorImage.self) { result in

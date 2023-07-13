@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "kodak_optura_981114.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "compression-type" : "gpu-optimized-smallest",
+    "template-rendering-intent" : "original"
+  }
+}

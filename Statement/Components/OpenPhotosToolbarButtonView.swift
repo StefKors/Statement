@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct OpenPhotosToolbarButtonView: View {
-    @EnvironmentObject private var model: Model
+    @Binding var selection: PhotosPickerItem?
 
     @State private var isPresented: Bool = false
     
@@ -16,12 +17,12 @@ struct OpenPhotosToolbarButtonView: View {
         Button("Open Photo") {
             isPresented.toggle()
         }
-        .photosPicker(isPresented: $isPresented, selection: $model.imageSelection, matching: .images)
+        .photosPicker(isPresented: $isPresented, selection: $selection, matching: .images)
     }
 }
 
 struct OpenPhotosToolbarButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        OpenPhotosToolbarButtonView()
+        OpenPhotosToolbarButtonView(selection: .constant(nil))
     }
 }

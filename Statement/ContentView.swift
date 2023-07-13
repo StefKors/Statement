@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import HistogramView
 
 struct ContentView: View {
     @EnvironmentObject private var model: Model
@@ -34,18 +35,26 @@ struct ContentView: View {
             .padding()
             .animation(.interpolatingSpring(stiffness: 300, damping: 20), value: model.viewPreference)
 
-            // if case let .success(image) = model.imageState {
-                Divider()
+            if case let .success(image) = model.imageState {
 
                 VStack {
-                    InspectorRenderer()
+                    Form {
+                        InspectorRenderer()
+                            .environment(\.currentImage, image.ciImage)
+                        ExifDataView(exif: image.exif)
+                        Section("Histogram (Source Image)") {
+                            HistogramView(image: image.nsImage, blendMode: .multiply)
+                                .frame(height: 100)
+                        }
+                        ExportControlsView()
+                    }.formStyle(.grouped)
                 }
                 .frame(width: 300)
                 .transition(.move(edge: .trailing).combined(with: .opacity))
-            // }
+            }
         }
         .scenePadding()
-        
+
     }
 }
 
